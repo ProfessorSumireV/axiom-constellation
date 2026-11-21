@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://professorsumirev.github.io/axiom-constellation/sitemap.xml

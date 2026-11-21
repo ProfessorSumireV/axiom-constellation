@@ -1,0 +1,2716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXIOM CONSTELLATION // QUANTUM ARCHIVE &amp; CODEX (CH. 1–103)</title><meta name="description" content="Official Quantum Archive &amp; Codex for Axiom Constellation: Factions, Characters, Core of Absolute, Solemnities, Tech Arsenal, and Chapter Guide (Ch. 1–103)."><meta property="og:title" content="Axiom Constellation — Characters &amp; Quantum Codex"><meta property="og:description" content="Explore the factions, characters, power tiers, and lore of Axiom Constellation."><link rel="canonical" href="https://professorsumirev.github.io/axiom-constellation/codex.html">
+  <style>
+    :root {
+      --bg-void: #050811;
+      --bg-panel: rgba(10, 16, 32, 0.88);
+      --bg-panel-hover: rgba(18, 28, 54, 0.96);
+      --border-hud: rgba(0, 240, 255, 0.25);
+      --border-glow: #00f0ff;
+      --accent-default: #00f0ff;
+      --accent-active: #00f0ff;
+      --text-main: #e0f4ff;
+      --text-muted: #7d9cb8;
+      --text-dim: #45627d;
+      --danger: #ff0055;
+      --warning: #ffaa00;
+      --success: #00ff88;
+      --gold: #ffd700;
+      --violet: #b366ff;
+      --font-mono: "Courier New", Courier, monospace;
+      --font-hud: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    /* THEME: Golden Parchment Variant (Matches Novel Reader) */
+    body.theme-parchment {
+      --bg-void: #1f1810;
+      --bg-panel: rgba(43, 34, 24, 0.92);
+      --bg-panel-hover: rgba(58, 46, 32, 0.98);
+      --border-hud: rgba(210, 180, 120, 0.35);
+      --border-glow: #d2b478;
+      --accent-default: #d2b478;
+      --accent-active: #ffd27d;
+      --text-main: #f5ecd7;
+      --text-muted: #b8a280;
+      --text-dim: #7a6b52;
+      --danger: #e63946;
+      --warning: #f4a261;
+      --success: #2a9d8f;
+      --gold: #e9c46a;
+      --violet: #c77dff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    input, select, textarea {
+      user-select: text;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: var(--font-hud);
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(0, 85, 255, 0.15), transparent 70%),
+        radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.08), transparent 50%),
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%);
+      background-size: 100% 4px;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 8, 17, 0.96);
+      border-bottom: 2px solid var(--accent-active);
+      box-shadow: 0 4px 25px rgba(0, 240, 255, 0.18);
+      backdrop-filter: blur(12px);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    body.theme-parchment header {
+      background: rgba(28, 22, 15, 0.97);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .hud-branding {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hud-logo {
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--accent-active);
+      display: grid;
+      place-items: center;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--accent-active);
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .hud-logo-inner {
+      width: 15px;
+      height: 15px;
+      background: var(--accent-active);
+      box-shadow: 0 0 8px var(--accent-active);
+    }
+
+    .hud-titles h1 {
+      font-size: 1.15rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      color: #fff;
+      text-shadow: 0 0 8px var(--accent-active);
+    }
+
+    .hud-titles p {
+      font-size: 0.68rem;
+      color: var(--accent-active);
+      letter-spacing: 1.5px;
+      font-family: var(--font-mono);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-hud);
+      color: var(--text-muted);
+      padding: 0.45rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+
+    .nav-btn:hover {
+      background: rgba(0, 240, 255, 0.15);
+      color: #fff;
+      border-color: var(--accent-active);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.28);
+    }
+
+    .nav-btn.active {
+      background: var(--accent-active);
+      color: #050811;
+      font-weight: bold;
+      border-color: #fff;
+      box-shadow: 0 0 15px var(--accent-active);
+    }
+
+    body.theme-parchment .nav-btn.active {
+      color: #1f1810;
+    }
+
+    .novel-link {
+      padding: 0.45rem 0.85rem;
+      border: 1.5px solid var(--gold);
+      background: rgba(255, 215, 0, 0.12);
+      color: var(--gold);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+
+    .novel-link:hover {
+      background: rgba(255, 215, 0, 0.28);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    }
+
+    .hud-telemetry {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      flex-wrap: wrap;
+    }
+
+    .telemetry-tag { color: var(--text-muted); }
+    .telemetry-val { color: var(--accent-active); font-weight: bold; }
+
+    .hud-btn {
+      background: transparent;
+      border: 1px solid var(--border-hud);
+      color: var(--accent-active);
+      padding: 0.32rem 0.6rem;
+      cursor: pointer;
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .hud-btn:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    main {
+      max-width: 1620px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem 4rem 1.5rem;
+      min-height: calc(100vh - 120px);
+    }
+
+    .tab-section {
+      display: none;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .tab-section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border-hud);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.45rem;
+      font-family: var(--font-mono);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .section-header h2::before {
+      content: "//";
+      color: var(--accent-active);
+    }
+
+    .section-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--accent-active);
+      color: var(--accent-active);
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.4rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      color: #fff;
+      font-family: var(--font-mono);
+      padding: 0.58rem 0.9rem;
+      font-size: 0.82rem;
+      min-width: 220px;
+      outline: none;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-active);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+
+    .filter-pill {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      color: var(--text-muted);
+      padding: 0.56rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 2px;
+    }
+
+    .filter-pill:hover, .filter-pill.active {
+      color: #fff;
+      border-color: var(--accent-active);
+      background: rgba(0, 240, 255, 0.15);
+    }
+
+    /* FACTIONS GRID */
+    .faction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .faction-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      border-left: 5px solid var(--faction-color, var(--accent-active));
+      padding: 1.15rem;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.22s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(8px);
+      border-radius: 2px;
+    }
+
+    .faction-card:hover {
+      background: var(--bg-panel-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px var(--faction-color, var(--accent-active));
+      border-color: var(--faction-color, var(--accent-active));
+    }
+
+    .faction-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .faction-name {
+      font-size: 1.08rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .faction-origin {
+      font-size: 0.62rem;
+      font-family: var(--font-mono);
+      padding: 0.18rem 0.45rem;
+      border: 1px solid;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .faction-alliance {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      color: var(--accent-active);
+      margin-bottom: 0.5rem;
+    }
+
+    .faction-motto {
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 0.65rem;
+      border-left: 2px solid rgba(255,255,255,0.2);
+      padding-left: 0.5rem;
+    }
+
+    .faction-summary {
+      font-size: 0.83rem;
+      line-height: 1.48;
+      color: var(--text-main);
+      margin-bottom: 0.9rem;
+    }
+
+    .faction-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.65rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+    }
+
+    /* CHARACTERS GRID */
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .char-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.45rem;
+      border-radius: 2px;
+    }
+
+    .char-card:hover {
+      border-color: var(--accent-active);
+      background: var(--bg-panel-hover);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .char-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .char-name {
+      font-size: 1.02rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .threat-pill {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      padding: 0.18rem 0.48rem;
+      font-weight: bold;
+      white-space: nowrap;
+      border-radius: 2px;
+    }
+
+    .char-faction-tag {
+      font-size: 0.7rem;
+      color: var(--accent-active);
+      font-family: var(--font-mono);
+    }
+
+    .char-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.32rem;
+    }
+
+    .mini-badge {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      padding: 0.12rem 0.42rem;
+      border-radius: 2px;
+      font-weight: bold;
+      border: 1px solid;
+    }
+
+    .mini-badge.hero { color: #00ff88; border-color: rgba(0,255,136,0.55); background: rgba(0,255,136,0.1); }
+    .mini-badge.boss { color: #ff0055; border-color: rgba(255,0,85,0.6); background: rgba(255,0,85,0.14); }
+    .mini-badge.core { color: #ffd700; border-color: rgba(255,215,0,0.55); background: rgba(255,215,0,0.1); }
+    .mini-badge.aegis { color: #b366ff; border-color: rgba(179,102,255,0.6); background: rgba(179,102,255,0.14); }
+    .mini-badge.pinnacle { color: #38bdf8; border-color: rgba(56,189,248,0.6); background: rgba(56,189,248,0.12); }
+    .mini-badge.recruit { color: #fb923c; border-color: rgba(251,146,60,0.6); background: rgba(251,146,60,0.12); }
+
+    .char-type {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .char-stats-mini {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.73rem;
+      font-family: var(--font-mono);
+      border-top: 1px dashed rgba(255,255,255,0.12);
+      padding-top: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    /* MODAL DOSSIER POPUP */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 5, 12, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      place-items: center;
+      padding: 1.25rem;
+    }
+
+    .modal-backdrop.open { display: grid; }
+
+    .dossier-card {
+      background: #090e1d;
+      border: 2px solid var(--accent-active);
+      width: 100%;
+      max-width: 880px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 0 34px rgba(0, 240, 255, 0.28);
+      padding: 1.85rem;
+      position: relative;
+      border-radius: 4px;
+    }
+
+    body.theme-parchment .dossier-card {
+      background: #251d14;
+      box-shadow: 0 0 34px rgba(0, 0, 0, 0.8);
+    }
+
+    .close-modal-btn {
+      position: absolute;
+      top: 1.15rem;
+      right: 1.15rem;
+      background: transparent;
+      border: 1px solid var(--border-hud);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    .close-modal-btn:hover { background: var(--danger); border-color: var(--danger); }
+
+    .dossier-header {
+      margin-bottom: 1.35rem;
+      border-bottom: 1px solid var(--border-hud);
+      padding-bottom: 1rem;
+    }
+
+    .dossier-threat {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      border: 1px solid;
+      border-radius: 2px;
+    }
+
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .stat-bar-container { margin-bottom: 0.75rem; }
+
+    .stat-label-wrap {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-track { height: 8px; background: rgba(255,255,255,0.1); position: relative; border-radius: 2px; }
+    .stat-fill { height: 100%; background: var(--accent-active); box-shadow: 0 0 8px var(--accent-active); border-radius: 2px; }
+
+    .signature-skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .signature-skill-item {
+      background: rgba(0, 240, 255, 0.05);
+      border-left: 3px solid var(--accent-active);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    /* CHAPTER ARCHIVE ACCORDION */
+    .chapter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .chapter-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      padding: 1.1rem 1.3rem;
+      border-left: 4px solid var(--accent-active);
+      transition: all 0.2s ease;
+      border-radius: 2px;
+    }
+
+    .chapter-card:hover {
+      background: var(--bg-panel-hover);
+      border-color: var(--accent-active);
+      transform: translateX(4px);
+    }
+
+    .chapter-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .chapter-title {
+      font-size: 1.15rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 0.55rem;
+    }
+
+    .chapter-summary {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    /* CODEX & LORE ARTICLE STYLES */
+    .lore-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      padding: 1.4rem;
+      margin-bottom: 1.4rem;
+      border-left: 4px solid var(--accent-active);
+      border-radius: 2px;
+    }
+
+    .lore-card h3 {
+      font-size: 1.18rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lore-card p, .lore-card li {
+      font-size: 0.89rem;
+      line-height: 1.62;
+      color: var(--text-main);
+    }
+
+    .lore-card p { margin-bottom: 0.85rem; }
+    .lore-card p:last-child { margin-bottom: 0; }
+
+    .wielder-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.85rem;
+      font-size: 0.84rem;
+    }
+
+    .wielder-table th, .wielder-table td {
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    .wielder-table th {
+      background: rgba(0, 240, 255, 0.1);
+      font-family: var(--font-mono);
+      color: var(--accent-active);
+    }
+
+    .solemnity-grid, .tech-grid, .atlas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .solemnity-card, .tech-card, .atlas-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-hud);
+      padding: 1.2rem;
+      position: relative;
+      border-radius: 2px;
+    }
+
+    .solemnity-card.redacted { opacity: 0.45; border-style: dashed; }
+
+    .solemnity-num, .tech-cat {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-active);
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+    }
+
+    .solemnity-title, .tech-title {
+      font-size: 1.06rem;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      border-left: 2px solid var(--accent-active);
+      padding-left: 1.25rem;
+      margin-left: 0.5rem;
+    }
+
+    .tl-item {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.16);
+      padding: 0.85rem 1rem;
+      border-radius: 2px;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -1.62rem;
+      top: 1.05rem;
+      width: 10px;
+      height: 10px;
+      background: var(--accent-active);
+      box-shadow: 0 0 8px var(--accent-active);
+      transform: rotate(45deg);
+    }
+
+    .tl-era {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+      font-weight: bold;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #050811; }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-active); }
+
+    @media (max-width: 900px) {
+      .dossier-grid { grid-template-columns: 1fr; }
+      .faction-grid, .character-grid, .solemnity-grid, .tech-grid, .atlas-grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+      .search-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="hud-branding">
+      <div class="hud-logo"><div class="hud-logo-inner"></div></div>
+      <div class="hud-titles">
+        <h1>AXIOM CONSTELLATION</h1>
+        <p>MASTER QUANTUM ARCHIVE // CANON CH. 1–103</p>
+      </div>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-btn active" data-tab="factions-view" onclick="switchTab('factions-view')">Factions</button>
+      <button class="nav-btn" data-tab="characters-view" onclick="switchTab('characters-view')">Characters</button>
+      <button class="nav-btn" data-tab="chapters-view" onclick="switchTab('chapters-view')">Chapter Guide</button>
+      <button class="nav-btn" data-tab="core-absolute-view" onclick="switchTab('core-absolute-view')">Core of Absolute</button>
+      <button class="nav-btn" data-tab="solemnities-view" onclick="switchTab('solemnities-view')">Solemnities</button>
+      <button class="nav-btn" data-tab="oblivion-view" onclick="switchTab('oblivion-view')">Oblivion</button>
+      <button class="nav-btn" data-tab="land-up-there-view" onclick="switchTab('land-up-there-view')">Land Up There</button>
+      <button class="nav-btn" data-tab="tech-arsenal-view" onclick="switchTab('tech-arsenal-view')">Tech &amp; Arsenal</button>
+      <button class="nav-btn" data-tab="world-atlas-view" onclick="switchTab('world-atlas-view')">Atlas &amp; Timeline</button>
+      <!-- Dual-linked novel launcher (points to converted_novel.html or your custom file) -->
+      <a href="index.html" class="novel-link" title="Open Novel Chapters">📖 Read Novel (Ch.1–103)</a><a href="https://sumirevariants.itch.io/" target="_blank" rel="noopener" class="novel-link" title="Play on Itch.io">🎮 Play Arcadian Breach</a>
+    </nav>
+
+    <div class="hud-telemetry">
+      <div><span class="telemetry-tag">SECTOR:</span> <span class="telemetry-val">UNIVERSE-26</span></div>
+      <div><span class="telemetry-tag">ENTRIES:</span> <span class="telemetry-val" id="hud-total-entries">0</span></div>
+      <div><span class="telemetry-tag">THREAT:</span> <span class="telemetry-val" style="color:var(--danger)">APOCALYPTIC</span></div>
+      <button class="hud-btn" onclick="toggleTheme()" id="theme-btn" title="Toggle Golden Parchment / Cyan HUD">THEME: CYAN</button>
+      <button class="hud-btn" onclick="resetThemeAccent()" title="Restore Accent">RESET ACCENT</button>
+      <button class="hud-btn" onclick="toggleAudio()" id="audio-btn">SFX: ON</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: FACTIONS DIRECTORY -->
+    <!-- ======================================================== -->
+    <section id="factions-view" class="tab-section active">
+      <div class="section-header">
+        <h2>Interstellar, Coalition &amp; Multiversal Factions</h2>
+        <span class="section-badge" id="faction-count-badge">LOADING FACTIONS...</span>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="faction-search" class="search-input" placeholder="Search factions, alliances, mottos..." onkeyup="filterFactions()">
+        <button class="filter-pill active" onclick="setFactionScope('ALL', this)">All Factions</button>
+        <button class="filter-pill" onclick="setFactionScope('INSIDE', this)">Universe-26 Native</button>
+        <button class="filter-pill" onclick="setFactionScope('OUTSIDE', this)">Outside U-26 / Cosmic</button>
+      </div>
+
+      <div class="faction-grid" id="factions-container"></div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: CHARACTER DATABASE -->
+    <!-- ======================================================== -->
+    <section id="characters-view" class="tab-section">
+      <div class="section-header">
+        <h2>Personnel, Heroes, Bosses &amp; Entities Registry</h2>
+        <span class="section-badge" id="character-count-badge">LOADING ENTITIES...</span>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="char-search" class="search-input" placeholder="Search name, power, skill, bio..." onkeyup="filterCharacters()">
+        <select id="char-faction-filter" class="search-input" style="width:auto;" onchange="onFactionDropdownChange()">
+          <option value="ALL">All Affiliations</option>
+        </select>
+        <select id="char-threat-filter" class="search-input" style="width:auto;" onchange="filterCharacters()">
+          <option value="ALL">All Threat Tiers</option>
+          <option value="S">Tier S (90–100 Threat)</option>
+          <option value="A">Tier A (80–89 Threat)</option>
+          <option value="B">Tier B (70–79 Threat)</option>
+          <option value="C">Tier C (1–69 Threat)</option>
+        </select>
+        <select id="char-role-filter" class="search-input" style="width:auto;" onchange="filterCharacters()">
+          <option value="ALL">All Categories</option>
+          <option value="Playable Hero">Playable Hero (Arcadian Breach)</option>
+          <option value="Game Boss">Game Milestone Boss (W10–W250)</option>
+          <option value="Core Wielder">Core Wielder</option>
+          <option value="Aegis">Aegis of Last Embers</option>
+          <option value="Core of Absolute">Core of Absolute Predecessor</option>
+          <option value="Pinnacle">Pinnacle / Almighty Division Veteran</option>
+          <option value="Recruit">New Recruits / Civilians (Ch. 103)</option>
+        </select>
+        <select id="char-sort" class="search-input" style="width:auto;" onchange="filterCharacters()">
+          <option value="THREAT_DESC">Sort: Threat (High → Low)</option>
+          <option value="THREAT_ASC">Sort: Threat (Low → High)</option>
+          <option value="STR_DESC">Sort: Strength (High → Low)</option>
+          <option value="DEF_DESC">Sort: Defense (High → Low)</option>
+          <option value="NAME_ASC">Sort: Alphabetical (A → Z)</option>
+        </select>
+      </div>
+
+      <div class="character-grid" id="characters-container"></div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: CHAPTER ARCHIVE GUIDE (CH. 1–103) -->
+    <!-- ======================================================== -->
+    <section id="chapters-view" class="tab-section">
+      <div class="section-header">
+        <h2>Axiom Constellation Canon Chapter Guide (Ch. 1–103)</h2>
+        <span class="section-badge" id="chapter-count-badge">103 CHAPTERS INDEXED</span>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="chapter-search" class="search-input" placeholder="Search chapter title, summary, character, event..." onkeyup="filterChapters()">
+        <button class="filter-pill active" onclick="setChapterRange('ALL', this)">All (1–103)</button>
+        <button class="filter-pill" onclick="setChapterRange('1-25', this)">Ch. 1–25</button>
+        <button class="filter-pill" onclick="setChapterRange('26-50', this)">Ch. 26–50</button>
+        <button class="filter-pill" onclick="setChapterRange('51-75', this)">Ch. 51–75</button>
+        <button class="filter-pill" onclick="setChapterRange('76-103', this)">Ch. 76–103</button>
+      </div>
+
+      <div class="chapter-list" id="chapters-container"></div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: CORE OF ABSOLUTE -->
+    <!-- ======================================================== -->
+    <section id="core-absolute-view" class="tab-section">
+      <div class="section-header">
+        <h2>History &amp; Mechanics: The Core of Absolute</h2>
+        <span class="section-badge">ARTIFACT OF THE 301 WIELDERS</span>
+      </div>
+
+      <div class="lore-card">
+        <h3>// FORGE OF THE VIGINTILLION LIGHTS</h3>
+        <p>
+          Unlike natural cosmic cores born from stellar nucleosynthesis or divine decree, the <strong>Core of Absolute</strong> is an engineered triumph of mortal ingenuity. It was forged untold eons ago by <strong>Antonietti Ernst</strong>, the 1st Wielder and prime architect from a multiversal <strong>Type-8 Human Civilization</strong>. Ernst dismantled technologies from countless multiversal colonies and sacrificed vigintillions of lights, stars, and lives to synthesize an existential engine capable of shattering the hierarchy of gods, Demi-Gods, and Celestials who oppressed humanity.
+        </p>
+        <p>
+          The Core operates across ten fundamental disciplines of physics: <em>Gravity, Dimension, Creation, Thermodynamic, Acoustic, Quantum, Space, Time, Electromagnetism, and Matter</em>. Each wielder leaves their memory, battle instincts, and final warnings inside the <strong>Realm of Absolute</strong>. When a wielder focuses purely on one discipline, their eyes shift color: <strong>Red</strong> for Gravity, <strong>Blue</strong> for Dimensional, and <strong>White</strong> for Creation.
+        </p>
+      </div>
+
+      <div class="lore-card">
+        <h3>// MECHANICAL STAGES, VARIANTS &amp; THE REJECTION PROTOCOL</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li><strong>Zeroth Level:</strong> Localized black holes, basic spatial displacement, and micro gravitational distortion.</li>
+          <li><strong>1st to 2nd Level:</strong> Neutronium Star compression, Supermassive Black Holes (<em>Sagittarius A*</em>, <em>Phoenix A</em>, <em>TON 618</em>, <em>Dark Phoenix A</em>).</li>
+          <li><strong>3rd Level:</strong> <em>Singularity Rebuild</em> — Infinite-density dimensional collapse that erases Celestials and destroys entire pocket dimensions.</li>
+          <li><strong>4th to 8th Level:</strong> <em>Overhaul of Quantum</em>, <em>Quasar Sovereignty</em>, <em>Mausoleum of Deity</em> sealing, and <em>Definitive Creation</em> (reconstructing shattered universes).</li>
+          <li><strong>9th to 13th Level:</strong> Multiversal Filament Ruptures, <em>Elysian of Decimation</em>, <em>Omnipotence of Destruction</em>, and <em>Truth Ringularity Redundancy</em>.</li>
+          <li><strong>20th Level (Core of Absolute Truth):</strong> Breaking past the limits of mortal logic into an omnipotent blank canvas (achieved solely by Ernst).</li>
+        </ul>
+        <p>
+          <strong>Rejection &amp; Variants:</strong> When a wielder's body nears expiration, the Core caps energy and detaches to find a new vessel. At Level 5+, SumireV unlocked her Second Variant — <strong>Radiant Grim</strong> (+40% baseline enhancement across all power, durability, and weapons, projecting a dark misty aura), while Ethan previously unlocked the <strong>Hero of Humanity</strong> red-crimson variant.
+        </p>
+      </div>
+
+      <div class="lore-card">
+        <h3>// CHRONICLES OF ALL RECORDED WIELDERS (301 LINEAGE)</h3>
+        <div style="overflow-x:auto;">
+          <table class="wielder-table">
+            <thead>
+              <tr>
+                <th>Wielder #</th>
+                <th>Name</th>
+                <th>Peak Level / Specialty</th>
+                <th>Historical Feat &amp; Fate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1st</td><td>Antonietti Ernst</td><td>Level 20 // Core of Truth</td><td>Type-8 creator of the Core; vanished from the Realm when the 50th user appeared.</td></tr>
+              <tr><td>30th</td><td>Oslo</td><td>Level 13 // System of Corruption</td><td>Corrupted entire multiverse sectors; his sentient corruption later spawned <em>Mimic Oslo</em>.</td></tr>
+              <tr><td>41st</td><td>Zimmerman</td><td>Level 10 // Sentinel Ascendant</td><td>Evolved from human to Sentinel; helped cast the Truth Black Hole that saved young SumireV.</td></tr>
+              <tr><td>93rd</td><td>Eleanor</td><td>High Level // Variant Theorist</td><td>Guided SumireV to surpass her limit and unlock her Second Variant, <em>Radiant Grim</em>.</td></tr>
+              <tr><td>96th</td><td>Valket</td><td>Level 9 // Filament Rupture</td><td>Slew 2 Higher Authorities Omega-Class; split 3 universes and cast <em>Divinity Lock</em> across 90 universes.</td></tr>
+              <tr><td>114th</td><td>Kaseng</td><td>Master of Solemnities</td><td>Memorized and destroyed the original Principal Ingenuities so deities could never capture them.</td></tr>
+              <tr><td>128th</td><td>Quartz (Schwarz)</td><td>Defensive Mastery</td><td>Specialist in impenetrable cosmic barriers and Cosmic Suppressant reinforcement.</td></tr>
+              <tr><td>140th</td><td>Julian</td><td>Level 6 // Energy Conservation</td><td>Taught SumireV wasted-energy reabsorption and sub-atomic <em>De-Construction</em> outside her Dimension.</td></tr>
+              <tr><td>170th</td><td>Brian</td><td>Realm Veteran</td><td>Joked around with SumireV in the Realm before getting launched across the terrain on a rocket.</td></tr>
+              <tr><td>176th</td><td>Lorenzo Winchester</td><td>High Level // Reanimation</td><td>Wiped out Colossal Verdict's universes in 1 week; terrified Admiral Xaria's fleet for 30,000 years.</td></tr>
+              <tr><td>234th</td><td>Eric</td><td>Level 9 // Spatial Quantum</td><td>Defended Universe-44; burned Universe-45 with the 6th Solemnity; co-built SumireV's UMT warp engine.</td></tr>
+              <tr><td>250th</td><td>Diego Mendoza</td><td>Level 18 // Thermodynamic</td><td>Slew Demi-God 900 in Universe-H15 by infusing the 6th Solemnity with the <em>Symphony of Human Malice</em>.</td></tr>
+              <tr><td>251st</td><td>Alan</td><td>Realm Guide</td><td>Guided SumireV through the dark ash-filled Realm to absorb all 5 shattered Core fragments.</td></tr>
+              <tr><td>261st</td><td>Ragna</td><td>Level 4 // Epsilon Radiation</td><td>Mastered <em>Absolute Zero</em> and Epsilon rays in Universe-9; died peacefully after Core rejection.</td></tr>
+              <tr><td>262nd</td><td>Ethan</td><td>Level 10–16 // Gravity Sovereign</td><td>From Universe-26; invented Prometheus Modulation; sealed U-26 inside a protective cube; ancestor of Codling.</td></tr>
+              <tr><td>280th</td><td>Colt</td><td>Master Inventor</td><td>Aided SumireV in architecting the 12-part blueprint for the 10th Solemnity.</td></tr>
+              <tr><td>285th</td><td>Ekaterina</td><td>Level 4.5 // Acoustic Master</td><td>Wields a flute casting <em>Symphony of Destruction</em>; selected by SumireV &amp; Revenant for resurrection in Ch. 101.</td></tr>
+              <tr><td>287th</td><td>Ava</td><td>Level 5 // Energy &amp; Quasar</td><td>Fought the Central Constellation Ace multiversal empire for 500 years before passing the Core to Victoria.</td></tr>
+              <tr><td>288th</td><td>Victoria</td><td>Level 2 // Cosmic Creation</td><td>Great-granddaughter of Ava; sacrificed her organs casting <em>Big Bang</em> to cripple CCA in Universe-NB00.</td></tr>
+              <tr><td>291st</td><td>Tanya</td><td>Realm Archivist</td><td>Identified resurrection-viable wielders (Level 5 and below) to assist SumireV against the Arcadian HIVE.</td></tr>
+              <tr><td>300th</td><td>Ronan</td><td>Zeroth Level // Water Herald</td><td>Defended humanity alone against Liminal; embedded the Core into dying SumireV to save Earth-A0D4.</td></tr>
+              <tr><td>301st</td><td>SumireV</td><td>Level 5+ // Radiant Grim</td><td>Leader of IC; defeated Aetheris, The One, Arcadian Brute, and forged the 10th Solemnity.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 5: THE SOLEMNITIES -->
+    <!-- ======================================================== -->
+    <section id="solemnities-view" class="tab-section">
+      <div class="section-header">
+        <h2>The Solemnities // Principal Ingenuities</h2>
+        <span class="section-badge">DEITY-KILLING MASTERWORKS</span>
+      </div>
+
+      <div class="lore-card">
+        <h3>// HISTORICAL OVERVIEW OF PRINCIPAL INGENUITIES</h3>
+        <p>
+          The <strong>Principal Ingenuities</strong> (or <em>Solemnities</em>) are ancient multiversal conceptual weapons forged before the Core of Absolute to give mortals the power to kill Demi-Gods and True Deities. Because the 114th wielder Kaseng destroyed their original artifacts to keep them out of enemy hands, Core of Absolute users reconstruct them from memory using Creation ability (while SumireV's Cross of IC mounts a capped 5% Solemnity module).
+        </p>
+      </div>
+
+      <div class="solemnity-grid">
+        <div class="solemnity-card redacted">
+          <div class="solemnity-num">01 // SOLEMNITY</div>
+          <div class="solemnity-title">???</div>
+          <p style="font-size:0.82rem; color:var(--text-muted);">Classified or unmentioned in archival chronicles.</p>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">02 // SOLEMNITY</div>
+          <div class="solemnity-title">SACRED TRANSIENT // LIMIT BREAKS</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            Invisible wearable nanotech armor grafted onto the user's skin. Passively breaks limits by +15% and enables casting higher-tier Dimension/Gravity spells beyond normal physical ceilings. Used by Ethan and Eric.
+          </p>
+          <span style="font-size:0.7rem; color:var(--accent-active); font-family:var(--font-mono);">STATUS: DEPLOYED BY ETHAN &amp; ERIC</span>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">03 // SOLEMNITY</div>
+          <div class="solemnity-title">CREATION OF FUNDAMENTAL</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            Captured mortal weapon wielded at 30% capacity by True Deities from The Land From Up There (featured in Ch. 80 &amp; Wave 200/250 Bosses) to manipulate foundational laws against Core users.
+          </p>
+          <span style="font-size:0.7rem; color:var(--danger); font-family:var(--font-mono);">STATUS: CAPTURED BY TRUE DEITIES</span>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">04 // SOLEMNITY</div>
+          <div class="solemnity-title">REALITY OF PLENITUDE</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            Conceptual reality-warping Solemnity. Unleashed at <em>Level 3: Abomination of Concept</em> by Mimic Oslo (Ch. 95) to erase four Higher Authorities and corrupt three universes simultaneously.
+          </p>
+          <span style="font-size:0.7rem; color:var(--warning); font-family:var(--font-mono);">STATUS: WIELDED BY MIMIC OSLO</span>
+        </div>
+
+        <div class="solemnity-card redacted">
+          <div class="solemnity-num">05 // SOLEMNITY</div>
+          <div class="solemnity-title">???</div>
+          <p style="font-size:0.82rem; color:var(--text-muted);">Classified or unmentioned in archival chronicles.</p>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">06 // SOLEMNITY</div>
+          <div class="solemnity-title">INFERNO UNLEASH</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            A colossal greatsword or 5.5m battle axe burning with quintillion-degree conceptual fire that scorches its own wielder. Levels: <em>Lv.2 Abundant Majestic Flame Destroyer</em>, <em>Lv.3 Totalitarianism of Human Cruelty</em>, <em>Lv.4 Inferno of Death</em>, <em>Lv.5 Flame of Reborn</em>, and <em>Lv.6 Embodiment of Human Wrath</em>.
+          </p>
+          <span style="font-size:0.7rem; color:var(--accent-active); font-family:var(--font-mono);">STATUS: WIELDED BY DIEGO, ERIC, SUMIREV &amp; HERMAN</span>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">07 // SOLEMNITY</div>
+          <div class="solemnity-title">FALLACY OF GODS</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            Colossal mechanical gear or crimson/holy Cross emitting an anti-divine field. Strips immortality and weakens deities by 20%–75%. Includes <em>Lv.3 Divinity Collapse</em> (80% energy drain) and <em>Lv.6 Decay Momentum</em>. Also fused into Ethan's Nuclear Accelerator Reactor.
+          </p>
+          <span style="font-size:0.7rem; color:var(--accent-active); font-family:var(--font-mono);">STATUS: WIELDED BY SUMIREV, ETHAN &amp; JOSHUA</span>
+        </div>
+
+        <div class="solemnity-card redacted">
+          <div class="solemnity-num">08 // SOLEMNITY</div>
+          <div class="solemnity-title">???</div>
+          <p style="font-size:0.82rem; color:var(--text-muted);">Classified or unmentioned in archival chronicles.</p>
+        </div>
+
+        <div class="solemnity-card">
+          <div class="solemnity-num">09 // SOLEMNITY</div>
+          <div class="solemnity-title">SINGULARITY ENGINE</div>
+          <p style="font-size:0.84rem; margin-bottom:0.5rem;">
+            Manifests as a protective umbrella, prism, or cosmic dome. <em>Lv.4 Stellar Force</em>, <em>Lv.8 Dark Energy Materialized</em>, <em>Lv.9 Truth Ringularity Redundancy</em> (horizonless light-speed expanding singularity that wiped THE Empire), plus SumireV's <em>Reality Reverse</em> &amp; <em>Axiom Mindstorm</em>.
+          </p>
+          <span style="font-size:0.7rem; color:var(--accent-active); font-family:var(--font-mono);">STATUS: SUMIREV SIGNATURE MASTERWORK</span>
+        </div>
+
+        <div class="solemnity-card" style="border-color: var(--success); grid-column: 1 / -1;">
+          <div class="solemnity-num" style="color:var(--success)">10 // SOLEMNITY (FORGED BY SUMIREV — ALL 12 MODULAR COMPONENTS)</div>
+          <div class="solemnity-title" style="color:#fff">TESSERACT OF HUMANITY (10 LEVELS)</div>
+          <p style="font-size:0.85rem; margin-bottom:0.75rem;">
+            The first new Solemnity created in eons, designed by SumireV with 12 semi-indestructible components so the destruction of any single piece never disables the entire weapon.
+          </p>
+          <div style="font-size:0.8rem; font-family:var(--font-mono); color:var(--text-muted); display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:0.5rem;">
+            <div>01. Core of Manifestation</div>
+            <div>02. Anti-Negative Amulet</div>
+            <div>03. Arbiter Orb (Harper)</div>
+            <div>04. Ring of Dichotomies Balance (7 Sins &amp; Virtues)</div>
+            <div>05. Eye of Infinity</div>
+            <div>06. Golden Dimensional Archive</div>
+            <div>07. Definitive Prometheus Modulation</div>
+            <div>08. Tree of Transient</div>
+            <div>09. Universal Energy Absorber</div>
+            <div>10. 4 Crystal Omnidirectional Offensive</div>
+            <div>11. Core of Spacetime</div>
+            <div>12. Cube of Infinite Source</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 6: THE OBLIVION -->
+    <!-- ======================================================== -->
+    <section id="oblivion-view" class="tab-section">
+      <div class="section-header">
+        <h2>The Oblivion Multiverse &amp; The Cataclysm</h2>
+        <span class="section-badge">EXTINCT EMPIRE OF CALAMITY</span>
+      </div>
+
+      <div class="lore-card">
+        <h3>// RISE, 9,000-YEAR WAR, &amp; THE SEALING CONTRACT</h3>
+        <p>
+          Originally human stock modified for deep-space survival, the <strong>Oblivion</strong> expanded across an entire Multiversal Sphere of 10,000 universes, hunting Higher Authorities, Celestials, and Deities. The Land From Up There united neighboring multiverses, Core Absolute divisions, and Demi-Gods against them in a 9,000-year war. At the brink, the Oblivion King detonated their home sphere and sealed it so only true Oblivion blood could enter.
+        </p>
+        <p>
+          During the final garrison stand of 1,500 warriors, the dying Eclipse people poured their souls into the Sun to bless <strong>Ares</strong> with <strong>Eclipse Oblivion</strong> (leaving a mysterious Key mark on his palm and whispering <em>"He is the Key"</em>), binding him by the <strong>Oath of Oblivion</strong> to bring Calamity upon the Land From Up There.
+        </p>
+      </div>
+
+      <div class="lore-card">
+        <h3>// THE CATACLYSM ENERGY HIERARCHY &amp; ELDRITCH FORM</h3>
+        <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li><strong>Cataclysm:</strong> Original energy separate from physics, magic, or cosmic radiation; converts any elemental attack into existential erasure. Requires energy tethers attached to the warrior's palms (SumireV lacks this tether restriction).</li>
+          <li><strong>Havoc:</strong> Localized annihilation sphere (5s detonation delay after impact) erasing all matter within its bubble.</li>
+          <li><strong>Destructor:</strong> Beams, bubbles, tendrils, and orbs that bypass conventional defense; crudely stolen and mimicked by the Arcadian race.</li>
+          <li><strong>Calamity &amp; Eldritch of Oblivion (Ch. 101):</strong> Channeled through Ares's dual <em>Annular &amp; Total Eclipse</em> eyes. Inside a Destructor Cocoon, Ares mutates into an Eldritch vessel with a Cataclysm Blade right arm, a glowing Havoc Sphere face, four charred skeleton arms on his back, and realistic multiversal collapse illusions.</li>
+        </ul>
+      </div>
+
+      <div class="lore-card">
+        <h3>// OBLIVION BLOODLINES, AFFILIATES &amp; CASTES</h3>
+        <p>
+          <strong>Known Branches &amp; Affiliates:</strong> <em>Oblivion Lunar, Oblivion Nebula, Oblivion Stars, Oblivion Solar, Oblivion Occultation, Eclipse People, and Children of Oblivion</em>.
+        </p>
+        <p>
+          <strong>Caste Hierarchy:</strong> <strong>1. Baseline Vanguard</strong> → <strong>2. The Letheans</strong> (Elite deity-hunters) → <strong>3. Primordial Trinitas</strong> → <strong>4. The Null Order</strong> (Royal bloodline of the King, capable of splitting Heaven Carriers).
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 7: THE LAND FROM UP THERE -->
+    <!-- ======================================================== -->
+    <section id="land-up-there-view" class="tab-section">
+      <div class="section-header">
+        <h2>The Land From Up There &amp; Cosmic Hierarchy</h2>
+        <span class="section-badge">OPPRESSORS OF MORTALITY (TIERS 01–08)</span>
+      </div>
+
+      <div class="lore-card">
+        <h3>// THE HIGH CELESTIAL REALM &amp; THE PANTHEON LEAGUE</h3>
+        <p>
+          <strong>The Land From Up There</strong> sits above mortal multiverses, ruled by the <strong>Pantheon League</strong>, True Deities, Demi-Gods, and Higher Authorities. They view mortal civilizations as livestock to harvest or prune. In Universe-26, their <strong>Celestial Council</strong> monitors SumireV, ambushed her in Cluster Creed using <em>Arbiter-11</em> and later banished her to Universe-4510, while the Arcadians secretly built a Layer 6 Ritual to summon Higher Authorities directly past Ethan's protective cube.
+        </p>
+        <p>
+          To counter human Principal Ingenuities, Higher Authorities field single-use <strong>Archangel</strong> artifacts, though they suffer devastatingly from <em>Fallacy of Gods</em> and <em>Inferno Unleash</em>.
+        </p>
+      </div>
+
+      <div class="lore-card">
+        <h3>// COMPLETE 8-TIER COSMIC POWER HIERARCHY</h3>
+        <div class="atlas-grid" style="margin-top:1rem;">
+          <div class="atlas-card">
+            <div class="solemnity-num">TIER 01 // ENTRY COSMIC</div>
+            <div class="solemnity-title">HERALD</div>
+            <p style="font-size:0.82rem;">Planetary/elemental cosmic fighters. Vulnerable to dense conventional munitions (1945 Iowa shells, hypersonic flak) and Orion artificial upgrades.</p>
+          </div>
+          <div class="atlas-card">
+            <div class="solemnity-num">TIER 02 // INTERMEDIATE</div>
+            <div class="solemnity-title">ARCHON</div>
+            <p style="font-size:0.82rem;">Wielders of judgment flame, necrosis, and temporal deceleration. Vulnerable to Serum Phaser Phase-6+, Voltrauma, and VNCV.</p>
+          </div>
+          <div class="atlas-card">
+            <div class="solemnity-num">TIER 03 // ADVANCED SOVEREIGN</div>
+            <div class="solemnity-title">SENTINEL</div>
+            <p style="font-size:0.82rem;">Space-bending and moon-crushing champions (29% of SoE's population; Cluster Creed's <em>Big 7 Sentinels</em>).</p>
+          </div>
+          <div class="atlas-card">
+            <div class="solemnity-num">TIER 04 // SPATIAL-TEMPORAL</div>
+            <div class="solemnity-title">CHRONOS &amp; NEXUS</div>
+            <p style="font-size:0.82rem;">Masters of time dilation, timeline freezing, and spatial nexus folding. Capable of rewinding planetary battlefields.</p>
+          </div>
+          <div class="atlas-card">
+            <div class="solemnity-num" style="color:var(--danger);">TIER 05 // MULTIVERSAL DECAY</div>
+            <div class="solemnity-title">ENTROPY</div>
+            <p style="font-size:0.82rem;">Decay sovereigns (such as High Entropy of THE and the New Big 7) who crumble galaxies into dust on contact.</p>
+          </div>
+          <div class="atlas-card">
+            <div class="solemnity-num" style="color:var(--danger);">TIER 06 // CELESTIAL</div>
+            <div class="solemnity-title">CELESTIAL &amp; GUARDIANS</div>
+            <p style="font-size:0.82rem;">Dimensional rulers immune to base physics until struck by Anti-Celestial missiles, Twin Prometheus Modulation, or Singularity Rebuild.</p>
+          </div>
+          <div class="atlas-card" style="border-color:rgba(255,215,0,0.6);">
+            <div class="solemnity-num" style="color:var(--gold);">TIER 07 // OUTER AUTHORITY</div>
+            <div class="solemnity-title">HIGHER AUTHORITIES</div>
+            <p style="font-size:0.82rem;">Outer-multiversal commanders wielding single-use <em>Archangel</em> anti-Solemnity gear and <em>Divinity</em> suppression. Sought by Arcadian Layer 6 rituals.</p>
+          </div>
+          <div class="atlas-card" style="border-color:var(--danger);">
+            <div class="solemnity-num" style="color:var(--danger);">TIER 08 // APEX OPPRESSORS</div>
+            <div class="solemnity-title">DEMI-GODS &amp; TRUE DEITIES</div>
+            <p style="font-size:0.82rem;">Sovereigns of the Pantheon League &amp; Heaven Carriers (<em>Demi-God 900</em>, <em>Supreme Deity</em>). Possess captured 3rd Solemnity tech and multi-universe erasure powers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 8: IC TECH, SERUMS & BIO-ARSENAL -->
+    <!-- ======================================================== -->
+    <section id="tech-arsenal-view" class="tab-section">
+      <div class="section-header">
+        <h2>Interstellar Chronicle &amp; Allied Tech, Serums &amp; Bio-Arsenal</h2>
+        <span class="section-badge">CH.1–103 &amp; CODEX ARSENAL</span>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card" style="border-left:4px solid var(--accent-default);">
+          <div class="tech-cat">AUGMENTATION // SERUM PHASER SERIES</div>
+          <div class="tech-title">Phaser IV → XI → Quantum → ABV → XX</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            Bio-cybernetic overclock serums pushing mortals past cosmic limits:<br>
+            • <strong>Phaser VII / IX:</strong> Standard IC elite cap (Stage 6 safe; Stage 11 lethal without Core restore).<br>
+            • <strong>Serum-ESD:</strong> Ampasy's bloodstream-fused variant granting +800%–2240% kinetic surge.<br>
+            • <strong>Phaser XI &amp; Variant S:</strong> Upgraded tungsten-vein / Dakari superhuman serum (safe to Phase 8; Carnage cooldown).<br>
+            • <strong>Phaser-Quantum:</strong> Almighty Division emergency vial restoring 90% damaged flesh in 3s.<br>
+            • <strong>Phaser-ABV (Arcadian Buster):</strong> Safe up to Stage 12–16 inside Transient Ascender suits.<br>
+            • <strong>Phaser-XX (SV):</strong> SumireV's Meta Human Suit Carnage Mode—grows an organic-metallic blade right arm and VNCV/Quoridium hooked left cord.
+          </p>
+        </div>
+
+        <div class="tech-card" style="border-left:4px solid var(--danger);">
+          <div class="tech-cat">BIO-WARFARE // VELOCIRAX-NYXVIRUS</div>
+          <div class="tech-title">Nano-Viral Strains &amp; Zegntek</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            Developed by Dr. Edward &amp; Dr. Pedro after Estella's odorless drowning gas <em>Zegntek</em>:<br>
+            • <strong>Standard &amp; Delayed Action:</strong> Turns teeth/nails chalky; mutates hosts into rabid sprinters or exploding biomass; at <strong>Night</strong>, Alphas gain thermal vision, exoskeletons, and 2× power.<br>
+            • <strong>Cosmic Variant (VNCV):</strong> Weakens Herald–Sentinel entities by 60%–70%.<br>
+            • <strong>Devastator Version Zero (VNDVZ):</strong> Iflaren's Patient-Zero tendrils used to wipe The Hunt.<br>
+            • <strong>Arcadian Blight (HVNAB):</strong> Liquefies Arcadian flesh into oily, slippery sludge so reinforcements stumble.
+          </p>
+        </div>
+
+        <div class="tech-card" style="border-left:4px solid var(--gold);">
+          <div class="tech-cat">SIGNATURE ARSENAL // CH. 101</div>
+          <div class="tech-title">Cross of IC &amp; Existential Quoridium</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            Forged by all IC Departments from <strong>Existential Quoridium</strong> (Tectonic Pact ore) smelted with <strong>Hallowed Drop</strong> (Holy Division):<br>
+            • 3D-prints any weapon (Miniguns, Destructor Railguns, Radical Collapse at 60%, 14x VNCV Bombs, Median Black Hole Kunai, Estella's <em>Invasive Web Foam</em>).<br>
+            • Projects a 100m aura healing allies 5%/s, debuffing sinful foes by 20%, and acting as an AI combat turret.
+          </p>
+        </div>
+
+        <div class="tech-card" style="border-left:4px solid var(--violet);">
+          <div class="tech-cat">GRAVITY &amp; TEMPORAL // ETHAN &amp; ERIC TECH</div>
+          <div class="tech-title">Prometheus Modulation, Clock-Lock &amp; UMT</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            • <strong>Prometheus Modulation (Grade 1 → Aegis-101 → EM1000 → Twin):</strong> Localizes black holes so gravity crushes targets without destroying nearby friendly planets; Twin mode pairs White Hole repulsion with Black Holes.<br>
+            • <strong>Clock-Lock:</strong> Freezes/slows temporal flow within a 30km dome (3–5m CD).<br>
+            • <strong>Universal Modular Travel (UMT):</strong> Built by Ethan &amp; Eric in Realm of Absolute; compresses inter-universal spacetime into kilometers using Natural Energy.
+          </p>
+        </div>
+
+        <div class="tech-card" style="border-left:4px solid var(--success);">
+          <div class="tech-cat">CAPITAL WAR MACHINES // IC FLEET</div>
+          <div class="tech-title">Behemoth, Dreadnought, Global Abomination &amp; GS-2</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            • <strong>Behemoth (Project Zealous):</strong> 400 Plasma Cannons, 80 Nuke Silos, 6× 20MT Railguns, Hypersonic Titanium Flak Nets (anti-infantry shredding), Ventral Archon Judgement Flamethrower, and a Dark Matter suicide core.<br>
+            • <strong>Global Abomination &amp; Hydra:</strong> Orbital Tungsten Rod satellites carrying Cluster, VX, or VNCV payloads.<br>
+            • <strong>Divine Bullet GS-1 / GS-2:</strong> Dr. Zack's star-charged missiles; GS-2 vacuum-implodes space-time before detonating.<br>
+            • <strong>ICADT-XII &amp; Radical Collapse:</strong> Anti-defense tanks firing hull-dissolving beams and Solar-System-erasing crimson lasers.
+          </p>
+        </div>
+
+        <div class="tech-card" style="border-left:4px solid var(--warning);">
+          <div class="tech-cat">INTER-FACTION TECH // ALLIES &amp; RIVALS</div>
+          <div class="tech-title">Orosian Pride, M-GenMu, Casket V7 &amp; Golden Archive</div>
+          <p style="font-size:0.83rem; line-height:1.5;">
+            • <strong>Orosian Pride (OP) Rockets:</strong> Engineered by Bro1 &amp; Bro2; scatters White Phosphorus &amp; air-burning molten metal that permanently halts Arcadian soil/body regeneration.<br>
+            • <strong>Casket V7 &amp; Mutilator Room:</strong> Instant full-body cellular restoration pods (also weaponized by Smear's Pinnacle tormentors and Mimic Oslo).<br>
+            • <strong>Golden Memory Archive:</strong> IC's pocket dimension streaming SumireV's 1,200-year battles from every camera angle.<br>
+            • <strong>Other Faction Tech:</strong> Orion <em>Lightspeed Transversal</em> (5s target time-slow), Pivot <em>Silent Penetration</em> &amp; <em>Dyfra</em>, Empire <em>Atomic Vibration</em> &amp; <em>M-GenMu</em>, GAU <em>OptCos Jammer</em>, Parliament <em>Frozo Cryo Lasers</em>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 9: WAR ATLAS & TIMELINE -->
+    <!-- ======================================================== -->
+    <section id="world-atlas-view" class="tab-section">
+      <div class="section-header">
+        <h2>Universe-26 War Atlas, 6-Layer HIVE &amp; Master Timeline</h2>
+        <span class="section-badge">CONTAINMENT SECTORS &amp; CANON CHRONOLOGY</span>
+      </div>
+
+      <div class="lore-card">
+        <h3>// THE 4 QUARANTINE SECTORS &amp; 6-LAYER ARCADIAN HIVE</h3>
+        <div class="atlas-grid" style="margin-top:0.8rem;">
+          <div class="atlas-card" style="border-left:4px solid #f97316;">
+            <div class="tech-cat" style="color:#fdba74;">OPEN WORLD // SECTOR I (NW)</div>
+            <div class="tech-title">Ashen Wastes</div>
+            <p style="font-size:0.82rem;">Scorched Quoridium battlefields contested by Arcadian Drone-Hordes, swooping Striders, and Stalkers.</p>
+          </div>
+          <div class="atlas-card" style="border-left:4px solid #ff0055;">
+            <div class="tech-cat" style="color:#ff80aa;">OPEN WORLD // SECTOR II (NE)</div>
+            <div class="tech-title">Crimson Mist Abyss</div>
+            <p style="font-size:0.82rem;">Bio-organic blister plains leaking crimson hive fog; patrolled by armored Halos, cloaking Beasts, and Spore Spitters.</p>
+          </div>
+          <div class="atlas-card" style="border-left:4px solid #00f0ff;">
+            <div class="tech-cat" style="color:#80f7ff;">OPEN WORLD // SECTOR III (SW)</div>
+            <div class="tech-title">Temporal Rift Foundry</div>
+            <p style="font-size:0.82rem;">Cyber-crystalline rift plates haunted by beam-charging Temporal Casters, blinking Serpents, and Rift Drones.</p>
+          </div>
+          <div class="atlas-card" style="border-left:4px solid #ffd700;">
+            <div class="tech-cat" style="color:#ffe666;">OPEN WORLD // SECTOR IV (SE)</div>
+            <div class="tech-title">Hive Core Citadel</div>
+            <p style="font-size:0.82rem;">Obsidian monolith heartland defended by Overseer Knights, Disputed Casters, Vanguard Titans, and Energy Suppressors.</p>
+          </div>
+          <div class="atlas-card" style="border-left:4px solid #b366ff; grid-column: 1 / -1;">
+            <div class="tech-cat" style="color:#d8b4fe;">THE 6-LAYER ARCADIAN HIVE DESCENT (CH. 86–101)</div>
+            <div class="tech-title">Layered Mega-Structure Under Planetary Siege</div>
+            <p style="font-size:0.84rem;">
+              <strong>Layers 1–2 (Zone A12 &amp; Stellar Abyss):</strong> Terrain shifts unpredictably every 10m (Zone A12). Bordered by the blood-soaked <em>Stellar Abyss</em> ocean (Night Sea Monsters, Kikel survivors) fought by ICNV, PFNF, and Orosian fleets. Breached into Layer 2 by Zero's 30,000km nuclear detonation.<br>
+              <strong>Layers 3–4 (Cryo Convergence):</strong> Ground frozen solid by Parliament Abstract's Frozo Satellites to block Arcadian regeneration.<br>
+              <strong>Layers 5–6 (Sanctum &amp; Higher Authority Ritual):</strong> Guarded by Arcadian Brutes, Operators, and Harvesters performing a dark ritual to pull Higher Authorities past Ethan's protective Cube.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lore-card">
+        <h3>// MASTER CHRONOLOGICAL TIMELINE (200M YEARS AGO — CHAPTER 103)</h3>
+        <div class="timeline-list">
+          <div class="tl-item">
+            <div class="tl-era">200,000,000 YEARS AGO // ETHAN'S ERA</div>
+            <p>Ethan (262nd Core of Absolute user) annihilates the Deities Colony inside Universe-26, repairs 80% of the damaged universe, invents Prometheus Modulation, and seals Universe-26 inside an invisible Cube.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">5,300 YEARS AGO // THE ARCADIAN SEAL</div>
+            <p>Cluster Creed's ancient hero uses psychological illusion tech to deceive Emperor Aetheris into retreating, sealing the entire Arcadian Race inside an isolated solar pocket.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">~1,200 – 800 YEARS AGO // EARTH-A0D4, INTELLECTUAL CHRONICLE &amp; PURGE ERA</div>
+            <p>Liminal invades Universe-26; dying Ronan implants the Core of Absolute into SumireV, who unleashes TON 618 across Earth-A0D4. Later, 85% of Intellectual Chronicle betrays her to GAU and executes Chris—triggering SumireV's wrath (<em>Dark Phoenix A</em>). Estella later devastates Sovereign of Eclipse, igniting tensions.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">250 YEARS AGO // THE SIGIL COMPACT WAR</div>
+            <p>Commonwealth, Cluster Creed, Sovereign of Eclipse, and Orion form the Sigil Compact Coalition against IC. SumireV defeats the Big 7 Sentinels and falls into a 10-year coma; Pinnacle Division (Estella, Joshua, Jacob, Harper, Herman) holds the line until IC deploys Velocirax-Nyxvirus over Umbara, collapsing the Coalition.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">CH. 1–31 // THE HUNT, COLOSSAL VERDICT, GAU &amp; OPERATION BARRACUDA</div>
+            <p>SumireV saves Bureau Coalition from The Hunt, destroys 90T GAU defenders at A0D4, completes Realm of Absolute training, confronts Xaria (Colossal Verdict), and sends Crown/Klein/Astra/Prometheus into Pivot Federation's Research Facility. IC relocates New Pantera and forms Zenith Triarch.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">CH. 32–61 // EMPEROR AETHERIS &amp; SUMIREV'S MULTIVERSAL EXILE</div>
+            <p>Aetheris unseals and invades Universe-26; SumireV defeats his 5 Crystals and Level 5 SolarBurst with <em>Singularity Rebuild</em>. While liberating Cluster Creed, Celestial Council ambushes SumireV and exiles her to Universe-4510. Fighting through THE Empire, SumireV obliterates their multiverse with <em>9th Solemnity Level 9: Truth Ringularity Redundancy</em>, while Codling takes command of IC and forms Zenith Quadrant Citadel.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">CH. 62–97 // HIVE DESCENT, MIMIC OSLO &amp; DEATH OF ARCADIAN BRUTE</div>
+            <p>IC's Behemoth devastates GAU; Iflaren's VNDVZ exterminates The Hunt. Mimic Oslo awakens with 20 corrupted Casket V7 Core wielders. Zero blasts a 30,000km hole into Layer 2 of the HIVE; SumireV returns, debuts <em>Radiant Grim</em>, unlocks the 12-part 10th Solemnity blueprint, and erases the Arcadian Brute across 19 dimensions.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-era">CH. 98–103 // AEGIS RECONVENES, GAU OUTBREAK &amp; THE NEW RECRUITS</div>
+            <p>Diego Mendoza's legacy vs Demi-God 900 inspires the current frontline. Aegis of Last Embers (SumireV, Nergal, Vlad, Thuban, Hohenstaufen, Mona, Zephyrus) unites against Layer 6 while GAU suffers a self-inflicted Velocirax outbreak on G-001–G-005 and civil war + Vega/Orion invasions. SumireV equips Cross of IC &amp; SP-XX, awakens Ares, and initiates Ekaterina's revival—while in Orion-TW3, outcast students Remington &amp; Penelope decide to join IC.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CHARACTER DOSSIER MODAL -->
+  <div id="char-modal" class="modal-backdrop" onclick="closeModalOnBackdrop(event)">
+    <div class="dossier-card">
+      <button class="close-modal-btn" onclick="closeModal()">✕</button>
+
+      <div class="dossier-header">
+        <div style="font-family:var(--font-mono); color:var(--accent-active); font-size:0.8rem;" id="modal-char-faction">AFFILIATION: UNKNOWN</div>
+        <h2 style="font-size:1.75rem; font-family:var(--font-mono); color:#fff;" id="modal-char-name">NAME</h2>
+        <div class="char-badges" id="modal-char-badges" style="margin-top:0.45rem;"></div>
+        <div id="modal-char-threat" class="dossier-threat">THREAT LEVEL: 00 / 100</div>
+      </div>
+
+      <div class="dossier-grid">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">// COMBAT ATTRIBUTES</div>
+          <div class="stat-bar-container">
+            <div class="stat-label-wrap">
+              <span>PHYSICAL / COSMIC STRENGTH</span>
+              <span id="modal-stat-str-val">0/100</span>
+            </div>
+            <div class="stat-track"><div id="modal-stat-str" class="stat-fill" style="width:0%"></div></div>
+          </div>
+          <div class="stat-bar-container">
+            <div class="stat-label-wrap">
+              <span>DEFENSIVE RESILIENCE</span>
+              <span id="modal-stat-def-val">0/100</span>
+            </div>
+            <div class="stat-track"><div id="modal-stat-def" class="stat-fill" style="width:0%"></div></div>
+          </div>
+          <div style="margin-top:1rem;">
+            <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">DAMAGE / COMBAT TYPE:</div>
+            <div id="modal-char-type" style="font-size:0.9rem; color:#fff; font-weight:bold; margin-top:0.25rem;">Type</div>
+          </div>
+          <div style="margin-top:1.25rem;">
+            <button class="hud-btn" onclick="copyDossier()">📋 COPY DOSSIER TEXT</button>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">// SIGNATURE COMBAT SKILLS</div>
+          <ul id="modal-char-skills" class="signature-skills-list"></ul>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">// DOSSIER &amp; OPERATIONAL BIOGRAPHY</div>
+        <p id="modal-char-bio" style="font-size:0.9rem; line-height:1.62; color:var(--text-main);"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function esc(s) {
+      return String(s === undefined || s === null ? "" : s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /* ========================================================
+       CANON CHAPTER MASTER DATA (CH. 1–103)
+       ======================================================== */
+    const CHAPTERS = [
+      { num: 1, title: "The Arrival", arc: "Prologue", summary: "SumireV tests Vulcan-E2 at 65% cap. Dr. Arc's hologram warns of war between Bureau Coalition and The Hunt; SumireV mobilizes for rescue." },
+      { num: 2, title: "Indomitable Resistance", arc: "The Hunt War", summary: "SumireV confronts Warlord Pegasus, summons an armada, fires Divine Bullet GS-1, and brokers a 250-year defense treaty with Bureau Coalition." },
+      { num: 3, title: "Under Watch", arc: "GAU Intrusion", summary: "GAU detects SumireV. A Herald of Sound attacks SumireV's station; she rams a tank at 50,000 km/h into a black hole to kill him. MiRi secures the liquid alien Orb in Sector-14." },
+      { num: 4, title: "The Expected", arc: "Orb Extraction", summary: "Ampasy and Nagasawa hold off The Empire's fleet with Phaser-5 while MiRi completes extraction and jumps to Pantera-55." },
+      { num: 5, title: "Silent Stars", arc: "Pantera Rebuilding", summary: "SumireV inspects Dr. Zack's thermonuclear Divine Bullet GS-1, plays poker with Ampasy and Nagasawa, and trains Vulcan-E1 with Global Abomination kinetic rods." },
+      { num: 6, title: "Wound of the Past", arc: "Earth-A0D4 Nightmare", summary: "SumireV relives the Liminal invasion: Ronan transfers the Core of Absolute to her, corruption overwhelms her, and she unleashes TON 618 across Earth-A0D4, killing 5 septillion lives." },
+      { num: 7, title: "Emerging Concern", arc: "GAU Approaching", summary: "The liquid Orb weakens nearby energy. Saifuru reports GAU's main armada approaching; SumireV initiates PROTOCOL-G and prepares perimeter gravity traps." },
+      { num: 8, title: "Incineration of the Soul", arc: "Saifuru's Duel", summary: "SumireV triggers gravity pulls. Saifuru engages an Archon, overclocks with nuclear fission, and vaporizes her with Voltra-Frost, cracking the planet." },
+      { num: 9, title: "Almighty Foe", arc: "Necromancer & Orion Arrival", summary: "SumireV swallows anti-matter warheads with a Quasi Black Hole, slays Death and Telekinesis Heralds, and disintegrates a Necromancer Archon inside her Dimension of Logic." },
+      { num: 10, title: "Counter-Offensive", arc: "Orion Routing", summary: "SumireV unleashes Robust Mode (300% energy); Iflaren's Vile Venom and Astra's Whip of Reality shatter Orion's fleet, capturing intact hardware." },
+      { num: 11, title: "Integration", arc: "Past Confessions", summary: "Vulcan-E2 field tests with 4 elements. SumireV confesses the tragedies of Earth-A0D4 and Intellectual Chronicle's betrayal to her crew." },
+      { num: 12, title: "Great Loss", arc: "GAU Fallout", summary: "GAU field hospitals handle 400M casualties from IC's counter-offensive. Admiral Blackbear seeks alliances with Parliament Abstract and The Commonwealth." },
+      { num: 13, title: "Unfinished Past", arc: "Return to A0D4", summary: "SumireV flies solo to Earth-A0D4, wipes out 90T GAU defenders and 600B warships with TON 618, and steps inside the Dimension of Logic." },
+      { num: 14, title: "Mind Storm of Predecessors", arc: "Realm of Absolute", summary: "Alan guides SumireV across Celestial bones to gather 5 Core shards. She meets Julian (energy reabsorption & sub-atomic De-Construction) and Valket (9th-Level Elysian)." },
+      { num: 15, title: "Fate Rewind", arc: "Ethan & Prometheus Modulation", summary: "SumireV learns of Victoria's Big Bang sacrifice against CCA and meets Ethan (262nd user from U-26), practicing sub-atomic De-Construction with Ronan." },
+      { num: 16, title: "Truth Behind SumireV", arc: "Unsealed Memory", summary: "SumireV reconstructs a flight recorder from A0D4, discovering she personally slaughtered civilian bunkers and Dr. Arc under corruption. She rests at RG31 outpost with Sky." },
+      { num: 17, title: "The Necessary Sacrifice", arc: "The Velocirax Legacy", summary: "Iflaren recounts the horrors of the Velocirax-Nyxvirus outbreak on Umbara during the Sigil Compact War. Mysterious dark smoke attacks strike major factions across Universe-26." },
+      { num: 18, title: "Duality Action", arc: "Colossal Verdict", summary: "SumireV returns the Ars orb to Admiral Xaria (Universe-17), who retreats in terror after remembering Lorenzo Winchester. Dakari's garrison is saved by Tectonic Pact." },
+      { num: 19, title: "Transition", arc: "Relocation to Sector C", summary: "IC relocates New Pantera to Sector C. Crown and Klein train with Impulse Force and Plasticity; Astra briefs them on Operation Barracuda against Pivot Federation." },
+      { num: 20, title: "Wall of Fortress", arc: "The 20km Wall", summary: "Crown, Klein, and Astra breach Pivot Federation's 20km mega-wall using Mythril Beasts, acid canisters, and a 150MT Impulse shockwave against Lord of Blizzard Raul." },
+      { num: 21, title: "The Worst Yet To Come", arc: "Reinforced Push", summary: "Dakari deploys Deep Rainforest Emergence, Dreadnoughts, and ICADT-XII tanks; Astra and Crown obliterate an orbital gun with Core of Retribution." },
+      { num: 22, title: "History Repeating", arc: "The Deserters", summary: "Pivot Federation conscripts face IC's mechanized grinder. Henry and deserters surrender to Astra and are relocated to IC's luxurious Homes of Ignorant prison." },
+      { num: 23, title: "The Split Second", arc: "Research Vault Breach", summary: "Prometheus stabilizes gravity as Crown extracts classified intel just before Pivot Federation self-destructs the facility with an anti-matter core." },
+      { num: 24, title: "Rules and Justice", arc: "Intergalactic Council", summary: "At GAU's summit, SumireV defies bioweapon bans. Orion requests to join Zenith Triarch; SumireV inspects Project Zealous (Behemoth Battleship)." },
+      { num: 25, title: "Engine of Destruction", arc: "Serum Phaser Upgrades", summary: "SumireV oversees Serum Phaser-IX Stage 11, reviews IC Core users, tests Pollinated Bloom battlesuits, and opens the Golden Memory Archive." },
+      { num: 26, title: "Uncertain Tide", arc: "Tectonic Defense", summary: "GAU, Parliament Abstract, and Order of North attack Tectonic Pact; Orion Shock Battalions, Ampasy (Phase 6), and Prometheus intervene." },
+      { num: 27, title: "Unreasonable Risk", arc: "SumireV vs General Victor", summary: "SumireV duels GAU's Victor, countering his moon pull and time-freezing before executing him in Serum Phaser Phase 7. She meets Codling on Earth-2." },
+      { num: 28, title: "New Opening Realm", arc: "Honduran Path", summary: "Team Expedition Realm enters the Honduran Path; SumireV, Codling, Devin, Crown, and Ampasy infiltrate Area 22 and neutralize the Mana Captain." },
+      { num: 29, title: "Guilty And Hero", arc: "Sigil Compact Memorial", summary: "Sovereign of Eclipse honors fallen heroes from the 13-year Sigil Compact War; Avalon recounts SumireV's Sagittarius A* black hole and her victory over the Big 7 Sentinels." },
+      { num: 30, title: "City of Spectre", arc: "Mana Converter Raid", summary: "SumireV, Crown, and Ampasy assault the City of Spectre; Crown detonates Anti-Attritions (25MT), Devin extracts stolen machinery, and SumireV unleashes Tectonic Pull." },
+      { num: 31, title: "Mystery Mighty Host of Humanity", arc: "Archive Revelations", summary: "Nagasawa, Klein, and Astra review SumireV's defeat of The One (Universe-121). Astra reveals her Oblivion origins." },
+      { num: 32, title: "Overseer of Filament", arc: "Aetheris Unsealed", summary: "Emperor Aetheris breaks the 5,300-year Arcadian Seal. Orion Prototype Team Gamma (Matteo, Zero, Arthur, Sofia) engages GAU forces; Ampasy tests Carnage Mode." },
+      { num: 33, title: "Aetheris of Arcadian", arc: "Higher Authority Threat", summary: "SumireV recognizes Aetheris's Havoc ability. Project Zealous (Behemoth) is dispatched toward GAU space while Ampasy and Iflaren team up on the Orion front." },
+      { num: 34, title: "Behemoth Against Conventional", arc: "Operation Goliath", summary: "GAU Admiral Adam attacks Behemoth with Commonwealth and Parliament fleets; Behemoth activates Second Life, shredding 290M troops with hypersonic titanium nets." },
+      { num: 35, title: "Reclaim Land", arc: "Orion Liberation", summary: "Prototype Team Gamma and IC clear GAU forces from Orion territory; Zero unleashes ultra-gamma rays, and Ampasy executes a Sentinel." },
+      { num: 36, title: "Balancing Timing", arc: "Arcadian Breach Warning", summary: "SumireV teaches Prometheus Modulation and simulator drills; Arcadians breach Imperial Phalanx, prompting GAU to order planet destroyers against Behemoth." },
+      { num: 37, title: "Revelation Past", arc: "Antonietti Ernst Lore", summary: "SumireV reveals Core of Absolute origins (Ernst's Type-8 civilization), shows the Singularity Engine replica, and explains dormant Core users in IC." },
+      { num: 38, title: "The Empire", arc: "Cluster Creed Front", summary: "Corporal Zola (Flame Archon) and Xipil deploy with The Empire into Cluster Creed; allied troops take anti-spore vaccines." },
+      { num: 39, title: "Titan Fall", arc: "Behemoth Detonation", summary: "Devin evacuates Behemoth crews; GAU's planet-destroyer laser triggers a dark-matter explosion wiping 6% of GAU's population. Saifuru saves Bureau Coalition border outposts." },
+      { num: 40, title: "Iron Curtain", arc: "Mobilizing Four Divisions", summary: "SumireV forms four strike divisions to counter Arcadians, confronting Emperor Aetheris's 2-billion-strong army with a 150MT railgun blast." },
+      { num: 41, title: "Empyrean & Mundane", arc: "SumireV vs Aetheris (Part 1)", summary: "SumireV clashes with Aetheris; she deploys Duality of Mundane, swallows his black hole with an enlarged singularity, and withstands Destructor tendrils." },
+      { num: 42, title: "Rising Sun", arc: "Divine Bullet Strike", summary: "Aetheris powers up with an emergency artificial sun; SumireV summons six supermassive black holes, and MiRi launches Divine Bullet GS-2 point-blank." },
+      { num: 43, title: "Crumbling Front", arc: "Southern Encirclement", summary: "Aetheris teleports south, ambushed by Nagasawa, Iflaren's acidic VNCV mist, Mikhail's telekinesis, Ampasy (chewing his severed hand), and Prometheus's Sagittarius A*." },
+      { num: 44, title: "Unexpected Guest", arc: "Northern Ambush", summary: "Aetheris marches north into Zenith Triarch, struck by Zero's Mach-50 nuclear slam, Matteo's molten nails, and Order of North anti-matter artillery." },
+      { num: 45, title: "Mighty Force of IC", arc: "Saifuru Overclock", summary: "Saifuru stabs Aetheris with Voltrauma; Aetheris awakens five crystals with SolarBurst, forcing Saifuru to fall back until SumireV arrives." },
+      { num: 46, title: "Humanity and Deity", arc: "Core Mastery Level 3", summary: "SumireV shatters Aetheris's armor with 50MT railguns, traps him inside a Dome of Logic, and unlocks Level 3 Core of Absolute mastery." },
+      { num: 47, title: "Human Terror", arc: "Aetheris Erased", summary: "Aetheris attempts a universal self-detonation; SumireV traps him inside a Pocket Dimension and erases him with 3rd-Level Singularity Rebuild, claiming the Core of Manifestation." },
+      { num: 48, title: "Cleaning and Sanitizing", arc: "Post-War Cleansing", summary: "IC and Orion cleanse mutated spore pockets; SumireV erects a physical energy barrier along the Western border, and Crown clears the southwest with Impulse Force." },
+      { num: 49, title: "Aid Incoming", arc: "Cluster Creed Relief", summary: "IC launches a 15,000-ship expedition into Cluster Creed; SumireV and Vihaan establish an alliance to eradicate Arcadian breeding hives." },
+      { num: 50, title: "Unexpected Turn", arc: "Celestial Ambush & SumireV Exiled", summary: "Celestial Council ambushes IC in Cluster Creed, banishing SumireV across the multiverse to Universe-4510 (Alvitr Zeta) while locking out Universe-26." },
+      { num: 51, title: "Interstellar Chronicle", arc: "Codling Takes Command", summary: "Codling unifies IC under the Pillar System. SumireV's audio recorder bequeaths him the Core of Diversity Potential; Klein helps him test Creation artillery." },
+      { num: 52, title: "Long Journey", arc: "Alvitr Zeta Defense", summary: "SumireV saves Commander Nate from Black Pandora in Universe-4510, summoning the full IC arsenal and firing Divine Bullet GS-01." },
+      { num: 53, title: "Previous Era Absolution", arc: "UMT Warp Engine", summary: "SumireV enters the Realm of Absolute; Ethan and Eric invent the Universal Modular Travel (UMT) engine, while Ragna demonstrates Absolute Zero." },
+      { num: 54, title: "Imperfection", arc: "Codling's Training", summary: "Codling studies WWII naval and aviation blueprints (USS Iowa, SR-71, Me 262) to master Creation without burning his core." },
+      { num: 55, title: "SumireV's Death", arc: "Franco's Prophecy", summary: "At Serenity Cliff, Libra recounts the Umbara night-infected horrors; ancient astronomer Franco foretells SumireV's eventual exhaustion in an upcoming multiversal war." },
+      { num: 56, title: "Independent", arc: "Universe-4510 Standoff", summary: "SumireV defeats Captain Cobalt and meets Vinci (Entropy of Filament); she intimidates arrogant overseer Romulus by manifesting the 7th Solemnity." },
+      { num: 57, title: "Reflecting of Past", arc: "1,200 Years of Trauma", summary: "SumireV remembers testing Singularity Rebuild 850 years ago. Her inner voices debate her past atrocities; she watches mecha dinosaurs march on Grerthaetar." },
+      { num: 58, title: "Prototype Test", arc: "Solemnity Lessons", summary: "Ethan and Eric test the UMT engine; Ethan demonstrates the 7th Solemnity, Eric recounts burning Universe-45 with the 6th, and Ernst urges SumireV toward Core of Absolute Truth." },
+      { num: 59, title: "Transversal", arc: "Crossing the Multiverse", summary: "SumireV rides the UMT through multiversal corridors, stops in Universe-4492 to deploy 50 Energy Beacons, and navigates toward hostile empire space." },
+      { num: 60, title: "Intensity Increase", arc: "Trinity Halifax Ambush", summary: "SumireV ambushes Trinity Halifax Empire (THE) in Universe-4487 with biochemical artillery, crushing a Crumble Entropy inside his own domain with Singularity Rebuild." },
+      { num: 61, title: "Overpressure Trap", arc: "Truth Ringularity Redundancy", summary: "Surrounded by thousands of Celestials in Universe-4450, SumireV unleashes the 7th Solemnity and 9th Solemnity Lv.9 (Truth Ringularity Redundancy), erasing THE's empire before escaping to U-4405." },
+      { num: 62, title: "Grain of Sand And Beach", arc: "The Deep Breakdown", summary: "SumireV recovers inside a Casket V7. Passing Oslo's corrupted universe (U-3829), she destroys an ancient anti-higher-authority mecha with the 6th Solemnity Lv.2, suffers an emotional breakdown recalling 1,200 years of isolation, and enters a coma." },
+      { num: 63, title: "The Empire Engagement", arc: "Zola's Frontline", summary: "Corporal Zola incinerates Arcadian bunkers with 40,000°C Equilibrium Flame; Xipil loses an arm to a cloaked Arcadian Beast before Zola pins it with a flare for artillery strikes." },
+      { num: 64, title: "Old Enemy", arc: "Ghoul Brown Recalled", summary: "GAU recalls retired Intellectual Chronicle traitor Ghoul Brown (Geometric Spatial Compression) to assault Cluster Creed and seize Marrow Energy." },
+      { num: 65, title: "Extermination of The Hunt", arc: "Iflaren's Devastator", summary: "Iflaren and Nagasawa drop into The Hunt's capital; Iflaren injects VNDVZ, unleashing Critical Overload Biomass that exterminates The Hunt's civilization." },
+      { num: 66, title: "The Incompatible Wielder", arc: "Codling's Near-Collapse", summary: "Codling studies the 9th Solemnity; in Simulator 3, he attempts to manifest the Singularity Engine, nearly collapsing Universe-26 until Devin severs his arm with a portal." },
+      { num: 67, title: "Government Authority Landing", arc: "The Dam Breach", summary: "Ghoul Brown's squad assaults Cluster Creed's barrier generator dam; Burner sacrifices himself in a 500,000kg TNT detonation to collapse the dam." },
+      { num: 68, title: "The Rise of Chronic", arc: "Zenith Quadrant Citadel", summary: "Codling delivers a historic total-war speech to 300M citizens, renames the alliance Zenith Quadrant Citadel (ZQC), and unites research across all four nations." },
+      { num: 69, title: "Titan Attrition vs Arcadian", arc: "Hohenstaufen's Core", summary: "Dictator Hohenstaufen reveals the Core of Dying Epoch; Imperial Phalanx, Pivot Federation, and Cluster Creed strain against Arcadian swarms." },
+      { num: 70, title: "Crown & Federation", arc: "Tachyon Obliterator", summary: "Crown rescues Commander Maxime in Red Zone with Tachyon Obliterator (wiping 9M Arcadians); Core user Isabella (Core of Contradictory) inverts a Dispute Class Arcadian." },
+      { num: 71, title: "The New Beginning", arc: "Relief Deployments", summary: "Codling dispatches ZQC expeditionary fleets to all Attrition Titan fronts. Dr. Pedro infuses Prometheus with a second Prometheus Modulation, ascending him to Low-Grade Celestial." },
+      { num: 72, title: "Relief for The Empire", arc: "MiRi's Colossal Mecha", summary: "Arthur gives laser-eyed Caesar a power visor; MiRi deploys a 4-Earth-sized Colossal Mecha with six fallen cosmic cores to slice Arcadian generals." },
+      { num: 73, title: "Legend of the Past", arc: "Gunther's Hesitation", summary: "Spearhead Bringers Ted and Brunhild drag gaming recluse Gunther (Core of Zeroth Nexus) to the frontline; Gunther recalls SumireV's Singularity Rebuild." },
+      { num: 74, title: "Veni, Vidi, Vici", arc: "Horizon Fortress 17", summary: "Saifuru, Iflaren, Ampasy, and Dr. Zack relieve Imperial Phalanx's Horizon Fortress 17; Zack unleashes devouring Nanobits, and the trio triggers temporary Phase 10 corruption." },
+      { num: 75, title: "Operation Liberation", arc: "Revenant's Necromancy", summary: "Vihaan launches Operation Liberation; Revenant raises Purge-era superhumans until Joshua saves him with the 7th Solemnity replica and Nameless Light." },
+      { num: 76, title: "One And Only Priest", arc: "Gate of Eden Lights", summary: "Joshua clears occupied Cluster Creed cities, incinerates 5 million Arcadians outside the North Gate with Gate of Eden Lights, and guides refugees south." },
+      { num: 77, title: "Abomination Determination", arc: "Slaying the Continent Beast", summary: "Codling, Prometheus (White Hole), and Joshua chain down a continent-sized Abomination Class Arcadian, decapitating it with a 30% Radical Collapse." },
+      { num: 78, title: "Another Front for Arcadian?", arc: "The Hive Revealed", summary: "GAU Marshall Zou meets Centauri Enigma's Siemen; they discover Orosian, Centauri, and Celebus forces already bleeding inside the Arcadian Hive." },
+      { num: 79, title: "The Attrition Master", arc: "Critical Mass Annihilation", summary: "Crown and Zero execute Zeroth Critical Mass Force Annihilation in Red Zone; Isabella rescues them at the cost of 80% Core Reserve, kissing Codling." },
+      { num: 80, title: "Arcadian Solution Required", arc: "Commonwealth Summit", summary: "Universe-26 alliances convene at Commonwealth; 92% agree to an anti-Hive coalition. Dakari slays GAU's infiltration team (Joseph, Grail, Faizan), sparing only Razor." },
+      { num: 81, title: "Pivot Federation Attrition Might", arc: "City of Long Lost", summary: "Pivot Federation artillery and Dyfra-101 gas wipe out Major Kruxos's surviving 65,000 Arcadian holdouts in the City of Long Lost." },
+      { num: 82, title: "Turning Tide", arc: "Estella Recruited", summary: "Codling plans Operation Eradication Arcadian; he visits an abandoned estate to recruit Estella (Core of Human Envious Desire) for the Hive frontline." },
+      { num: 83, title: "The Overseer", arc: "Estella's Wrath (800 Years Ago)", summary: "Estella recounts saving wounded SumireV from Sovereign of Eclipse's Hercules Rank 800 years ago, destroying 120 SoE worlds and igniting the Sigil Compact Coalition." },
+      { num: 84, title: "The Final String of Hope", arc: "The Sigil Compact War (250 Years Ago)", summary: "Flashback: While SumireV is comatose, Joshua, Han, Jacob, Harper, Argus, and Herman Siegfried (6th Solemnity sacrifice) hold off 500Q Coalition troops until Velocirax ends the war." },
+      { num: 85, title: "Ethan, Humanity's Best Regards", arc: "The Ancient War (200M Years Ago)", summary: "Flashback: Ethan wields Backbone of Humanity and Fallacy of Gods against 1.3M Celestials, drops Phoenix A (370B solar masses), and seals Universe-26 in a protective Cube." },
+      { num: 86, title: "HIVE Death Landing", arc: "Landing Day", summary: "ZQC invades the Hive; Harper, Atika, Argus (500M soul dome), and Jacob (10M-arm Quoridium Buddha) unleash Pinnacle Division carnage." },
+      { num: 87, title: "Closing Distance", arc: "The 10th Solemnity Blueprint", summary: "In the Realm of Absolute, SumireV designs the 12-component 10th Solemnity (Tesseract of Humanity) and trains inside the Solemnity Simulator." },
+      { num: 88, title: "Enemy Soil", arc: "Hohenstaufen's Advance", summary: "ZQC tests HVNAB sludge; Hohenstaufen lands with atomic-vibrating hulls and ages Overseers into dust; Iflaren briefly reunites with Gunther." },
+      { num: 89, title: "Orosian Weaponry Might", arc: "The Mad Twins", summary: "21-year-old twin engineers Bro1 & Bro2 invent Orosian Pride (OP) Molten Rockets, dropping white phosphorus and liquid metal to permanently halt Arcadian regeneration." },
+      { num: 90, title: "Full Scale of Interstellar Chronicle", arc: "Operation Encirclement", summary: "SumireV returns to ZQC, delegating Codling and Estella. Karl Siegfried debuts his Quoridium 6th Solemnity knockoff, while Vega retreats from an Arcadian Dragon." },
+      { num: 91, title: "Abyss Awaiting", arc: "Stellar Abyss Sea Monster", summary: "Pivot Federation Squad PFAF-15 (Jianhao, Blackwell, Higges, Saoirse) aboard PFS Arham survives an ambush by a 6-armed Kikel sea monster in the Stellar Abyss." },
+      { num: 92, title: "Opening Front For Naval Warfare", arc: "The Three Fleets", summary: "Commander Aziz (ICNV Pantera), Commander John (PFS Aurus), and Orosian rocket ships bombard Arcadian shore defenses with double-laceration shells." },
+      { num: 93, title: "Variants Born", arc: "Codling's Trench Raid", summary: "Codling destroys a mountain turret from within using Dark Soul Flame and acoustic subwoofers; an Arcadian Operator warns of 6 deeper Hive layers." },
+      { num: 94, title: "Corruption & Integrity", arc: "Mimic Oslo Awakens", summary: "Prime Minister Thuban (ABA) leads 1Q divisions into Layer 1. In outer space, Mimic Oslo awakens with 20 reanimated Casket V7 Core users, slaughtering Higher Authorities." },
+      { num: 95, title: "Battle of Race", arc: "Layer 2 Breakthrough", summary: "SumireV wipes Striders with Acoustic of Death; Codling, Joshua, and Saifuru execute an Arcadian Halo to Seven Nation Army; MiRi intercepts the Arcadian Dragon." },
+      { num: 96, title: "Veteran From Hell", arc: "The SS Division", summary: "Hohenstaufen unleashes Gunther's 3,000-year-old great-grandfather Dieter and the SS Division (Mechanical Ghidorah, Ulrich's Gem Heart, Nemesis) into Layer 2." },
+      { num: 97, title: "Blitzkrieg Explosive Movement", arc: "SumireV vs Arcadian Brute", summary: "SumireV equips the Meta Human Suit SP-XX (Carnage Mode), battling the regenerating Arcadian Brute before banishing and erasing him across 19 dimensions with Singularity Rebuild." },
+      { num: 98, title: "Tales of Diego Mendoza", arc: "The Slaying of Demi-God 900", summary: "Flashback: 250th user Diego Mendoza infuses the 6th Solemnity with the Symphony of Human Malice, destroying Demi-God 900 and scorching 400 universes." },
+      { num: 99, title: "Utopia of IC", arc: "The 0% Crime Society", summary: "Jimister broadcasts IC's free healthcare (Casket V7), Homes of Ignorant, and Midnight Club; Squad PFAF-15 (Jianhao, Blackwell) defects to IC." },
+      { num: 100, title: "Aegis Of Last Embers", arc: "Reconvening the 13", summary: "Nergal (Core of Mystic) and Vlad (Core of Ruin) breach their fronts. The 13 Aegis reconvene in Layer 2 to plan stopping the Layer 6 ritual. GAU suffers a catastrophic Velocirax outbreak." },
+      { num: 101, title: "Protector of Humanity Augmentation", arc: "Radiant Grim & Cross of IC", summary: "SumireV unlocks Radiant Grim (+40%), crafts the Cross of IC, awakens Ares (Casket 777), and initiates Ekaterina's revival; Ares eradicates an Arcadian ambush with Eldritch illusions." },
+      { num: 102, title: "Unfairness & Ignorance", arc: "Remington & Penelope", summary: "In Orion-TW3, high-grade student Remington defends girls against bullies and is framed by corrupt discipline. Outcast vigilante Penelope joins him to train their IQ and apply to IC." }
+    ];
+
+    /* ========================================================
+       FACTIONS MASTER DATA
+       ======================================================== */
+    const FACTIONS = [
+      {
+        id: "ic", name: "Interstellar Chronicle (IC)", scope: "INSIDE", color: "#00f0ff", alliance: "Zenith Quadrant Citadel (Lead)",
+        motto: "Fear is instinct, courage is humanity. Our flesh may be weak, but we refuse to kneel.",
+        summary: "Founded by SumireV after the fall of Intellectual Chronicle. A 115+ IQ meritocracy with 0% crime, free Casket V7 healthcare, Homes of Ignorant prisons, Golden Memory Archive, ADWMD, Holy Divisions 1–7, and Pinnacle/Almighty Divisions."
+      },
+      {
+        id: "zqc", name: "Zenith Quadrant Citadel (ZQC)", scope: "INSIDE", color: "#38bdf8", alliance: "IC • Orion-TW3 • Tectonic Pact • Bureau Coalition",
+        motto: "Four Nations Unified Under Logic, Ingenuity, and Unyielding Will.",
+        summary: "Renamed from Zenith Triarch by Codling once Orion-TW3 joined fully. Runs the ZQC Combined Researcher Project, fusing IC nanotech, Tectonic Quoridium, Bureau healing, and Orion Transversal Speed."
+      },
+      {
+        id: "aegis", name: "Aegis of Last Embers", scope: "INSIDE", color: "#b366ff", alliance: "13 Supreme Defenders of Universe-26",
+        motto: "Fuelled by Willpower and Refusal to Kneel — Whatever the Cost.",
+        summary: "Council of 13 supreme protectors from across rival factions who first united against The One and reconvened in Layer 2 of the Arcadian HIVE (SumireV, Vlad, Nergal, Hohenstaufen, Thuban, Zephyrus, Mona, and fallen/missing peers)."
+      },
+      {
+        id: "gau", name: "Government Authority of the Universe (GAU)", scope: "INSIDE", color: "#e5c07b", alliance: "Supreme Administrative Bloc (SAB)",
+        motto: "Absolute Order, Absolute Authority through Galactic Hegemony.",
+        summary: "Top 1 military superpower of Universe-26 relying on Marrow-Energy Artificial Celestials and OptCos Jammers. Crippled by SumireV's A0D4 wipe, Behemoth, the G-001–G-005 Velocirax outbreak, Movement Liberation civil war, and Orion/Vega invasions."
+      },
+      {
+        id: "movement_lib", name: "Movement Liberation", scope: "INSIDE", color: "#fb923c", alliance: "Anti-GAU Rebellion (Supported by Vega)",
+        motto: "Break the Chains of GAU Conscription and Exploitation!",
+        summary: "Breakaway revolutionary coalition formed across 11+ rebelling GAU planets after 40% of their populations were bled dry in wars and the Velocirax outbreak; armed by Vega Fascist Alliance."
+      },
+      {
+        id: "empire", name: "The Empire", scope: "INSIDE", color: "#ff0033", alliance: "Attrition Titan Alliance",
+        motto: "Purity, Conquest, and the Eternal Reich of the Superior Breed.",
+        summary: "Authoritarian empire descended from an alternate 1955 WWII Axis victory. Deploys atomic-vibration intangibility, M-GenMu, Phenotype Chimera beasts, Spearhead Bringers, and ancient SS Divisions."
+      },
+      {
+        id: "pivot", name: "Pivot Federation", scope: "INSIDE", color: "#ff7700", alliance: "Attrition Titan Alliance",
+        motto: "Victory through Attrition, Endurance, and Boundless Manpower.",
+        summary: "Industrial attrition republic fielding hundreds of billions of conscripts, suicide TNT troopers, Dyfra-08/101 gas, Silent Penetration tech, and the Stellar Abyss Naval Force (PFNF)."
+      },
+      {
+        id: "cluster", name: "Cluster Creed", scope: "INSIDE", color: "#d4af37", alliance: "Attrition Titan (Formerly Sigil Compact)",
+        motto: "Guardians of the Ancient Seals, Preservers of the Sacred Line.",
+        summary: "Ancient cosmic stronghold rich in Marrow Energy. Sealed the Arcadian Race 5,300 years ago; fielded Paladins, Serenity Cliff legends, and the New Big 7 Sentinels during Operation Liberation."
+      },
+      {
+        id: "orion", name: "Orion-TW3", scope: "INSIDE", color: "#00e5ff", alliance: "Zenith Quadrant Citadel",
+        motto: "Through Transversal Horizons, We Forge Our Unbroken Ascent.",
+        summary: "High-tech human-cyborg nation famed for Lightspeed Transversal travel, Artificial Heralds, and Prototype Teams. Joined ZQC after GAU's betrayal and launched a 1.2-Quadrillion-troop invasion of GAU."
+      },
+      {
+        id: "radiant", name: "Radiant Guard", scope: "INSIDE", color: "#ffd700", alliance: "Independent / Anti-HIVE Intervention",
+        motto: "Impenetrable Behind the Wall of Alcatraz, Bathed in Divine Dust.",
+        summary: "Wealthy isolationist nation protected by the Wall of Alcatraz. Converts Natural Energy into Mana and Spirituelle Pythagoras via the Honduran Path; committed 100T Monolith Absu warships and General Nergal to the HIVE."
+      },
+      {
+        id: "north", name: "Order of North", scope: "INSIDE", color: "#e0f7fa", alliance: "Polar Starborne Alliance",
+        motto: "Cold as Siberian Steel, Unyielding as the Northern Front.",
+        summary: "Northern superpower deploying 984 trillion troops, Stal' Divisions, and cosmic cavalry under Queen Kira and Spectre champion Vlad."
+      },
+      {
+        id: "tectonic", name: "Tectonic Pact", scope: "INSIDE", color: "#b0bec5", alliance: "Zenith Quadrant Citadel",
+        motto: "Steadfast as Bedrock, Unyielding as Quoridium.",
+        summary: "Resource-rich confederacy holding Universe-26's only natural Quoridium and laser-deflecting Vicious Earth hull ore."
+      },
+      {
+        id: "bureau", name: "Bureau Coalition", scope: "INSIDE", color: "#00e676", alliance: "Zenith Quadrant Citadel",
+        motto: "Order Through Reconstruction, Life Preserved Across Stars.",
+        summary: "Technocratic medical power holding Compound Meteorite reserves and rapid cellular healing tech; saved by SumireV during The Hunt invasion."
+      },
+      {
+        id: "eclipse", name: "Sovereign of Eclipse (SOE)", scope: "INSIDE", color: "#7e57c2", alliance: "Polar Starborne (Formerly Sigil Compact)",
+        motto: "From Twilight's Veil, the Sentinels Reign.",
+        summary: "Noble cosmic state with a 29% natural Sentinel population. Lost 80% of its worlds to Estella's wrath and 50B+ troops in the Sigil Compact War."
+      },
+      {
+        id: "commonwealth", name: "The Commonwealth", scope: "INSIDE", color: "#42a5f5", alliance: "Supreme Administrative Bloc (SAB)",
+        motto: "Prosperity Through Industrial Supremacy.",
+        summary: "Spearheaded the Sigil Compact Coalition 250 years ago; fields Perseus Anti-IC Lasers and Planet-Destroyer orbital batteries."
+      },
+      {
+        id: "phalanx", name: "Imperial Phalanx", scope: "INSIDE", color: "#ff1744", alliance: "Attrition Titan Alliance",
+        motto: "Fortress Worlds in Motion, Steel Horizons Unbroken.",
+        summary: "Converts entire planets into mobile Horizon Fortresses (31 constructed) and deploys IP-Mark 19 coil-laser/flamer fighters."
+      },
+      {
+        id: "parliament", name: "Parliament Abstract", scope: "INSIDE", color: "#26c6da", alliance: "Polar Starborne & SAB",
+        motto: "Logical Governance, Absolute Cryogenic Equilibrium.",
+        summary: "Cryogenic superpower operating Frozo Satellites that freeze space-time terrain in HIVE Layers 3–4 to halt Arcadian regeneration."
+      },
+      {
+        id: "old_ic", name: "Intellectual Chronicle (Old IC)", scope: "INSIDE", color: "#64748b", alliance: "Predecessor to Interstellar Chronicle",
+        motto: "Reason Brought to an Ignorant World — Before the Betrayal.",
+        summary: "SumireV's original 300-million-citizen faction in Vibrance. Destroyed centuries ago after 85% of members betrayed her to GAU and executed Chris, prompting SumireV to unleash Dark Phoenix A."
+      },
+      {
+        id: "sigil_compact", name: "Sigil Compact Coalition", scope: "INSIDE", color: "#94a3b8", alliance: "Historical Anti-IC Coalition (Dissolved)",
+        motto: "500 Quadrillion Strong Against One Mortal Bastion.",
+        summary: "Massive alliance (Commonwealth, Cluster Creed, SoE, minority Orion) formed 250 years ago to crush IC. Shattered after SumireV slew the Big 7 Sentinels and IC unleashed Velocirax-Nyxvirus across Umbara."
+      },
+      {
+        id: "hunt", name: "The Hunt", scope: "INSIDE", color: "#76ff03", alliance: "Galaxy-4 Invasive Horde (Exterminated)",
+        motto: "Devour, Expand, Exterminate.",
+        summary: "Invasive ravager species from Sector-B12 led by Warlord Pegasus; annihilated by Iflaren's VNDVZ bio-bombs and ZQC during Operation Extermination."
+      },
+      {
+        id: "arcadian", name: "Arcadian Race (False Deities)", scope: "INSIDE", color: "#aa00ff", alliance: "6-Layer HIVE Host",
+        motto: "We Are the Sovereign Empyreans; Mortals Exist to Be Harvested.",
+        summary: "Ancient pseudo-deity swarm unsealed after 5,300 years. Empowered by daylight SolarBurst and stolen Destructor tech; their 6-Layer HIVE aims to breach Ethan's Cube via a Layer 6 Ritual."
+      },
+      {
+        id: "aba", name: "Ascendancy Brigration Alliance (ABA)", scope: "OUTSIDE", color: "#0288d1", alliance: "Centauri Enigma • Foundry Iron Grid • Sovereign Coalition",
+        motto: "The Bulwark of Sector A Shall Never Yield.",
+        summary: "Sector-A heavyweight fielding 900 Quintillion divisions, AI humanoids, and Oscillation Scorpii Emitters. Secured Layer 1 of the Arcadian HIVE under Prime Minister Thuban."
+      },
+      {
+        id: "orosian", name: "Imperium Orosian Hegemony (IOH)", scope: "OUTSIDE", color: "#ff5722", alliance: "Southern HIVE Vanguard",
+        motto: "Through Rocketry and Pressure, We Incinerate the Stars.",
+        summary: "Rocket-supremacy power armed with TICBMs, 25m Menckal mechs, and Orosian Pride (OP) Molten Rockets. Lost 90 Quintillion troops in the earliest solo breach into the Hive."
+      },
+      {
+        id: "consortium", name: "Consortium Entente / Celebus", scope: "OUTSIDE", color: "#a855f7", alliance: "Western Buffer & Chemical Air Support",
+        motto: "Swift Extraction, Relentless Chemical Attrition.",
+        summary: "Led by Mona (Aegis of Last Embers). Specializes in agile hit-and-run acrobatics and Consort Distortion Relay bombings that melt enemy cohorts into sticky conjoined traps."
+      },
+      {
+        id: "vega", name: "Vega Fascist Foundation", scope: "OUTSIDE", color: "#f43f5e", alliance: "Seraphim Extinction • Ordinal Cardinality",
+        motto: "Total Reclamation by Any Means Necessary.",
+        summary: "Aggressive alliance whose NE Hive front collapsed against the Arcadian Dragon; subsequently launched Operation Wing (200T troops) against GAU's northern border."
+      },
+      {
+        id: "colossal", name: "Colossal Verdict (Universe-17)", scope: "OUTSIDE", color: "#78909c", alliance: "Extra-Universal Raiders",
+        motto: "The Multi-Universal Verdict Falls.",
+        summary: "Dark Matter Smoke conquerors who devoured Universes 23–24 via the Ars tracker orb, but fled Universe-26 in terror upon encountering SumireV's Core of Absolute."
+      },
+      {
+        id: "alvitr", name: "Alvitr Zeta & U-4510", scope: "OUTSIDE", color: "#80d8ff", alliance: "Alvitr Zeta • Entropy of Filament",
+        motto: "Shielding the Filament Through Technological Ascendance.",
+        summary: "Universe-4510 powers fighting Black Pandora, where SumireV was banished by the Celestial Council before returning home."
+      },
+      {
+        id: "the_empire", name: "Trinity Halifax Empire (THE)", scope: "OUTSIDE", color: "#c084fc", alliance: "Multiversal Entropy Coalition (Erased)",
+        motto: "Natural Energy Denied, Entropy Eternal.",
+        summary: "Hostile multiversal empire spanning Universes 4450–4487 that hunted SumireV during her return journey—until erased by her 9th Solemnity Level 9: Truth Ringularity Redundancy."
+      },
+      {
+        id: "oblivion_faction", name: "The Oblivion Multiverse", scope: "OUTSIDE", color: "#ffd54f", alliance: "Null Order • Primordial Trinitas • Letheans",
+        motto: "Through Calamity We Ascend, Oblivion Never Dies.",
+        summary: "Extinct 10,000-universe human empire wielding Cataclysm, Havoc, Destructor, and Calamity. Self-destructed and sealed their Sphere after a 9,000-year war with the Land From Up There."
+      },
+      {
+        id: "core_absolute_order", name: "Realm of Absolute (301 Wielders)", scope: "OUTSIDE", color: "#38bdf8", alliance: "Consciousness of the Core of Absolute",
+        motto: "No Victory Without Sacrifice — Logic & Courage Against Divinity.",
+        summary: "Psychic ash-plain inside the Core of Absolute housing the 300 fallen predecessors from Ernst (1st) to Ronan (300th), mentoring SumireV (301st)."
+      },
+      {
+        id: "land_up_there", name: "The Land From Up There", scope: "OUTSIDE", color: "#fde047", alliance: "Pantheon League • Celestial Council",
+        motto: "Mortals Exist Beneath Divine Authority.",
+        summary: "High dimensional realm of True Deities, Demi-Gods, Higher Authorities, and Celestials who enforce cosmic hierarchy—and unleashed Mimic Oslo upon reality."
+      },
+      {
+        id: "ext_invaders", name: "Extra-Universal Threats", scope: "OUTSIDE", color: "#ef4444", alliance: "The One (U-121) • Liminal • Black Pandora",
+        motto: "Universes Burn Before Cosmic Invasion.",
+        summary: "Independent apex invaders outside Universe-26, including Liminal (who triggered SumireV's awakening), The One (Universe-121 time-lightning conqueror), and Black Pandora (U-4510)."
+      }
+    ];
+
+    /* Characters dataset from Ch. 1–103 canon */
+    const CHARACTERS = [
+      // ... same verified database with full tags & stats
+      {
+        name: "SumireV", factionId: "ic", secondaryFactions: ["zqc", "aegis", "old_ic", "core_absolute_order"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Core Wielder", "Aegis", "Core of Absolute"],
+        type: "301st Core of Absolute // Radiant Grim // Cross of IC // SP-XX Carnage Mode",
+        strength: 99, defense: 99, threat: 100,
+        skills: [
+          "9th Solemnity: Truth Ringularity Redundancy & Logic Dimension (∞ Erasure)",
+          "Cross of IC (Existential Quoridium + Hallowed Drop + 3D Arsenal + Invasive Web)",
+          "Meta Human Suit SP-XX Carnage Mode + Prometheus Modulation TON 618 / Primordial BH"
+        ],
+        bio: "Sovereign of Interstellar Chronicle, 1,200-year-old Protector of Humanity, and 301st Core of Absolute wielder. Returned from Universe-4510 exile with Second Variant Radiant Grim (+40% baseline), forged the 12-part 10th Solemnity blueprint, annihilated the Arcadian Brute across 19 dimensions, and awakened Ares."
+      },
+      {
+        name: "Estella", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Core Wielder", "Pinnacle"],
+        type: "Core of Human Envious Desire // Reality Fracture // Almighty Division Lead",
+        strength: 97, defense: 95, threat: 97,
+        skills: [
+          "Core of Human Envious Desire: Mimic & Demi-God Hand Breach",
+          "Human Variant Suit: 8 Celestial-Dissecting Tendrils",
+          "Hex-Greatsword Pulsar Array & Zegntek Chemical Warfare"
+        ],
+        bio: "SumireV's older sister, Top 2 of IC, and commander of the Pinnacle/Almighty Division. Devastated 80% of Sovereign of Eclipse 800 years ago and co-led IC's Layer 2 HIVE assault alongside SS veterans."
+      },
+      {
+        name: "Codling", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Core Wielder"],
+        type: "Core of Diversity Potential // 225-IQ Creation Architect // Petrification",
+        strength: 84, defense: 89, threat: 90,
+        skills: [
+          "Core of Diversity Potential: Dual 800mm Gustav, Battalions & Multi-Wave Air Wings",
+          "Radical Collapse Crimson Laser & 8-Missile Nuclear/GS-1 Salvo",
+          "3x Global Abomination Rods (VNCV, Cluster Bombs, Normal) & Petrification Gaze"
+        ],
+        bio: "225-IQ strategist from Earth-2 and acting leader of IC during SumireV's exile. Inherited Ethan's bloodline intuition, formed Zenith Quadrant Citadel, and unified IC under the Pillar System."
+      },
+      {
+        name: "Jacob 'The King'", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Pinnacle"],
+        type: "Top 12 Pinnacle/Almighty Hermit // Elemental & 10M-Arm Quoridium Buddha",
+        strength: 95, defense: 96, threat: 95,
+        skills: [
+          "10,000,000-Arm Quoridium Elemental Buddha Golem & Spear of Cremation",
+          "Forbidden Scroll: Prehistoric Death-Jungle (Blocks Sunlight) & Pollinator Roots",
+          "PTSD Crimson Madness (4x Damage & Poisonous Diamond Spikes)"
+        ],
+        bio: "Veteran survivor of the Sigil Compact War whose grief hardened into ruthless dominance ('Power is Eternity'). Summons continent-sized Quoridium-armored Buddha golems and sunlit-blocking prehistoric jungles."
+      },
+      {
+        name: "Joshua", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Pinnacle"],
+        type: "Priest of IC // Gem of Eternal Peace // Spirituelle Pythagoras",
+        strength: 86, defense: 96, threat: 90,
+        skills: [
+          "7th Principal Ingenuity Replica & Gate of Eden Lights",
+          "Nameless Lights: Trinity Orb, 15x Holy Weapons & Dual Spinning Halberds",
+          "5s Absolute Nullification & Hallowed Drop Ally Regeneration (Holy Div 1–7)"
+        ],
+        bio: "High Priest of IC commanding Holy Divisions 1–7. Channels Spirituelle Pythagoras light targeting the 7 Deadly Sins, neutralizing physical defenses while constantly regenerating allied squads."
+      },
+      {
+        name: "Crown", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Core Wielder"],
+        type: "Core of Domination // Impulsive Force Vanguard",
+        strength: 89, defense: 92, threat: 89,
+        skills: [
+          "Critical Impulsive Force & Tachyon Obliterator",
+          "Repulsive Overload Pull & Hyper Frontal Projectile-Erasing Shockwave",
+          "Anti-Living Proton Cannon & 360° Impulsive Force Bubble"
+        ],
+        bio: "IC frontliner bearing the Core of Domination. Shattered Pivot Federation's mega-wall in Operation Barracuda and combined with Zero to annihilate 99% of Red Zone Arcadians."
+      },
+      {
+        name: "Saifuru", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Core Wielder"],
+        type: "Core of Haste Lv.4 (940,199 km/h) // Voltra-Frost // Worldbreaker Sword",
+        strength: 92, defense: 89, threat: 92,
+        skills: [
+          "Core of Haste Lv.4 & Phase 10: Shattered Planet Core",
+          "Voltra-Frost Blizzard (Pulmonary Coagulation Necrosis) & 250km Chain Lightning",
+          "Nuclear Fission Overclock & EMP Overload Surge"
+        ],
+        bio: "Scout Unit A of IC and Archon-slayer whose Voltra-Frost freezes enemies from the inside out. Broke the siege of Imperial Phalanx's Horizon Fortress 17 and liberated Bureau Coalition borders."
+      },
+      {
+        name: "Iflaren", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Core Wielder"],
+        type: "Core of Devouring // Patient Zero of Velocirax-Nyxvirus",
+        strength: 91, defense: 90, threat: 94,
+        skills: [
+          "Velocirax-Nyxvirus Extinction Nuke (Dome, Tendrils & 15s Permanent Fallout)",
+          "HVNAB: Melting Arcadian Blight & Triple Nyxvirus Eruption",
+          "Calamity Anchor Dive & Bio-Devour Biomass Lifesteal"
+        ],
+        bio: "Former Empire bio-scientist experimented on by Hohenstaufen's regime until joining IC. Exterminated The Hunt using VNDVZ and liquefies Arcadian legions with HVNAB."
+      },
+      {
+        name: "Duncan", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Playable Hero", "Pinnacle"],
+        type: "Luminance Sovereign // Almighty Division // Gamma Ray Burst",
+        strength: 93, defense: 90, threat: 92,
+        skills: [
+          "Gamma Ray Burst (Lightspeed Edge Dash Leaving 9,999 DPS Burn Path)",
+          "Hypernova Shattering Ray & Wall-Bouncing Light Beam V",
+          "Hydra 3-Way Laser, 6x Explosive Light Punches & Sky Light Barrage"
+        ],
+        bio: "Blood-brother of Joshua and veteran of the Almighty Division. Evolved his light manipulation into lethal relativistic Gamma Ray Bursts via SumireV's augmentation."
+      },
+      {
+        name: "Ares", factionId: "oblivion_faction", secondaryFactions: ["ic"],
+        factionName: "The Oblivion Multiverse",
+        tags: ["Playable Hero"],
+        type: "Pureblood Oblivion // Eclipse Oblivion // Eldritch of Oblivion",
+        strength: 98, defense: 97, threat: 98,
+        skills: [
+          "Eldritch of Oblivion (Cataclysm Blade Arm & 4 Charred Arms)",
+          "Unorthodox of Eclipse (Annular & Total Eclipse Sun Absorption)",
+          "Cataclysm Dawn of Doom & Collapse Illusions"
+        ],
+        bio: "Awakened by SumireV from Casket 777 (Ch. 101). Blessed by the dying Eclipse people with the mysterious Key mark, he annihilated an Arcadian ambush squad around Ekaterina's Revival Platform."
+      },
+      {
+        name: "Astra", factionId: "ic", secondaryFactions: ["oblivion_faction", "zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Core Wielder"],
+        type: "Core of Retribution // Oblivion Survivor // Reality Fracture",
+        strength: 92, defense: 90, threat: 92,
+        skills: [
+          "Whip of Reality: Void Displacement Rifts",
+          "Core of Retribution: Strings of Domination",
+          "Oblivion Cataclysm Armament Amplification"
+        ],
+        bio: "Pureblood survivor of the extinct Oblivion multiverse and longtime IC frontline commander whose whips slice shields and banish entire fleets into alternate realities."
+      },
+      {
+        name: "Prometheus", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Low-Grade Celestial Equivalent // Twin Prometheus Modulation Gravity Master",
+        strength: 95, defense: 94, threat: 95,
+        skills: [
+          "Twin Prometheus Modulation: White Hole Repulsion & Black Hole",
+          "Sagittarius A* & Planetary Gravitational Shatter",
+          "IC Central TON 618 Reactor Maintenance"
+        ],
+        bio: "IC's first artificial Low-Grade Celestial-tier champion after infusing a second Prometheus Modulation into his bloodstream. Powers IC's TON 618 energy ring."
+      },
+      {
+        name: "Ampasy", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Percentile Strength // 90% Machine Tungsten-Vein Cyborg // Serum-ESD",
+        strength: 96, defense: 94, threat: 93,
+        skills: [
+          "2240% Overclocked Carnage Mode Punch",
+          "Serum-ESD + Phaser-XI Phase 8–10 Surge",
+          "Kinetic & Thermal Energy Absorber Slam"
+        ],
+        bio: "Team 1 Elite brawler whose bloodstream natively binds with Serum-ESD. Upgraded with tungsten veins and thermal-kinetic nanobots to tear Sentinels and Celestials apart bare-handed."
+      },
+      {
+        name: "Damien", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 5 Pinnacle/Almighty Division // Space Shocker & 7 Crystals",
+        strength: 94, defense: 93, threat: 94,
+        skills: [
+          "Space Shocker Reality-Hammer Slam (1D Void Banishment)",
+          "7-Crystal Overdrive Resonance",
+          "Energy Tendril Battlefield Harvest"
+        ],
+        bio: "Ranked Top 5 among IC's strongest heroes. Fought in the Sigil Compact Death March and gathered the bodies of fallen IC comrades across the HIVE."
+      },
+      {
+        name: "Harper", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 3 Pinnacle/Almighty Division // Arbiter Orb & Cosmos Light",
+        strength: 94, defense: 92, threat: 94,
+        skills: [
+          "Arbiter Orb Lv.2: Decimation of Life (50,000 Light Beams/s)",
+          "Estella Enraged Alter-Ego Laser Barrage",
+          "3-Gem Cosmos Light Twin-Dagger Blitz"
+        ],
+        bio: "Top 3 veteran of IC and co-developer of Serum Phaser-Quantum. Wields the Arbiter Orb—one of the 12 core components of SumireV's 10th Solemnity."
+      },
+      {
+        name: "Argus", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 8 Pinnacle/Almighty Division // Sanguine Vampiric Flesh-Grafting",
+        strength: 94, defense: 93, threat: 94,
+        skills: [
+          "Soul-Absorbing Flesh Dome (500M+ Tallied Souls)",
+          "Fallen Angel Temporal-Pause Blade",
+          "Razor-Hook Tendril Tissue Synthesis"
+        ],
+        bio: "Top 8 veteran of the Sigil Compact Death March. Grafts living enemy flesh onto his biomechanical body to grow 4× in size while reaping millions of souls."
+      },
+      {
+        name: "Atika", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 9 Pinnacle/Almighty Division // Kinetic Matter Crumble",
+        strength: 92, defense: 92, threat: 91,
+        skills: [
+          "Celestial Skull Flail Physics Spin",
+          "Lightspeed Planetary Chunk Throw",
+          "Matter Crumble Disintegration Strike"
+        ],
+        bio: "Top 9 veteran of IC who shatters planets with kinetic crumble touches and hurls continental fragments at lightspeed into enemy fleets."
+      },
+      {
+        name: "Barry", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 6 Pinnacle Division // Overclocked Temporal Manipulation",
+        strength: 89, defense: 89, threat: 90,
+        skills: [
+          "Overclocked Temporal Acceleration Field",
+          "Chronos-Split Death March Blitz",
+          "Time-Locked Evasion Shift"
+        ],
+        bio: "Top 6 elite of IC's Death March alongside Harper, Jacob, Damien, and Argus, wielding an overclocked battlesuit tuned for time control."
+      },
+      {
+        name: "Riven", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Pinnacle Division // Shadow Entity & Capital-Ship Claws",
+        strength: 88, defense: 87, threat: 88,
+        skills: [
+          "Colossal Shadow Claw Ship-Bisector",
+          "Umbral Void Ambush",
+          "Shadow-Step Attrition Strike"
+        ],
+        bio: "IC Pinnacle veteran whose massive materialized shadow claws sliced apart Sigil Compact capital warships."
+      },
+      {
+        name: "Herman Siegfried", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Top 16 Pinnacle Hero (Deceased) // Destruction Flame // 6th Solemnity Replica",
+        strength: 95, defense: 85, threat: 96,
+        skills: [
+          "6th Solemnity Lv.3: Totalitarianism of Human Cruelty",
+          "6th Solemnity Lv.4: Inferno of Death (Downfall of Divinity)",
+          "Jagged Cutting Destruction Flame"
+        ],
+        bio: "Sacrificed his charred body in the Sigil Compact War, burning 2.2 billion Coalition ships with the 6th Solemnity Replica before turning to ash."
+      },
+      {
+        name: "Karl Siegfried", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of Solar Flare Dept // Quoridium-Protected 6th Solemnity Knockoff",
+        strength: 90, defense: 89, threat: 89,
+        skills: [
+          "Enchanted SolarFlare of Destruction",
+          "Quoridium Thermal-Proof Knockoff 6th Solemnity",
+          "Department of Solar Flare Orbital Blaze"
+        ],
+        bio: "Younger brother of Herman Siegfried who combined their family's destruction flame with Tectonic Pact Quoridium suits to unleash 6th-Solemnity power without dying."
+      },
+      {
+        name: "Mikhail", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Sentinel-Grade Telekinesis // Kinetic Stasis",
+        strength: 90, defense: 91, threat: 89,
+        skills: [
+          "Internal Organ Telekinetic Crush",
+          "Sentinel-Level Barrier Suppression",
+          "Arcadian Spores Compression Purge"
+        ],
+        bio: "Telekinetic specialist capable of restricting Emperor Aetheris's organs mid-flight and holding back cosmic attacks."
+      },
+      {
+        name: "MiRi", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of IC Engineering // Multi-Earth Colossal Mecha Pilot",
+        strength: 92, defense: 95, threat: 91,
+        skills: [
+          "Colossal Mecha (6 Fallen Cosmic Entity Cores)",
+          "Prometheus Controlled Variant + Judgement Flame Chainsaw",
+          "Energy-Siphoning Back Tendrils & Automatic Ordinance Printer"
+        ],
+        bio: "Chief IC Engineer who recovered the Ars orb, standardized IC fleets, and piloted a multi-Earth Colossal Mecha to slay the Arcadian Dragon."
+      },
+      {
+        name: "Klein", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Synthetic Mirage // Acoustic Psychological Warfare",
+        strength: 83, defense: 85, threat: 82,
+        skills: [
+          "Carbon-Fiber Armored Legions & Field Batteries",
+          "Molten Plastic Flood",
+          "Psychological Loudspeaker Broadcast Array"
+        ],
+        bio: "Creation operative and Codling's partner who conjures whole battalions of synthetic artillery and deafening demoralization broadcasts."
+      },
+      {
+        name: "Dakari", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Post-Purge Superhuman // Nature & Pollinated Bloom // SP-XI Variant S",
+        strength: 89, defense: 91, threat: 87,
+        skills: [
+          "Serum Phaser-XI Variant S (100% Output)",
+          "Deep Amazon Rainforest Energy Drain",
+          "Pollinated Bloom Spores & Ancient Wood Monsters"
+        ],
+        bio: "Born in Tidal Pulsar and recruited by SumireV. Single-handedly wiped out GAU's 20-man ZQC infiltration team including Joseph, Grail, and Faizan."
+      },
+      {
+        name: "Devin", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Core Wielder"],
+        type: "Core of Reality // Spatial Portal Master",
+        strength: 81, defense: 87, threat: 86,
+        skills: [
+          "Core of Reality: Sector-Wide Division Portals",
+          "Spatial Portal Severance (Saved Codling)",
+          "Implosion Bomb & Energy-Link Gateways"
+        ],
+        bio: "Master of spatial transport whose portals connect all IC fronts, evacuate Behemoth survivors, and link Mao's energy across galaxies."
+      },
+      {
+        name: "Mao", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Core Wielder"],
+        type: "Core of Serenity // Multiversal Neutral Energy Conduit",
+        strength: 80, defense: 88, threat: 88,
+        skills: [
+          "Core of Serenity: Cross-Galaxy Neutral Energy Tether",
+          "Armada Energy Siphon & SumireV Boost",
+          "Multi-Division Passive Recharge"
+        ],
+        bio: "Wields the Core of Serenity. Stood alone channeling thousands of glowing Neutral Energy strings simultaneously to sustain SumireV and every IC front in the HIVE."
+      },
+      {
+        name: "Nagasawa", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of Communications & Strategy // Orbital Strike Coordinator",
+        strength: 78, defense: 82, threat: 79,
+        skills: [
+          "4× Orbital Annihilation Laser Array",
+          "Space Kraken Portal Summon",
+          "Unstable Serum Phaser Ambush"
+        ],
+        bio: "Strategic navigator of IC who survived an ambush by Emperor Aetheris using decoy clones and unstable Serum injectors."
+      },
+      {
+        name: "Dr. Arc (Arcturus)", factionId: "ic", secondaryFactions: ["old_ic"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Archived Hall Holographic AI // Former Chief Scientist",
+        strength: 40, defense: 80, threat: 72,
+        skills: [
+          "Consciousness Network Station Transfer",
+          "Vulcan-E2 Multi-Element Calibration",
+          "Archived Hall Tactical Simulation"
+        ],
+        bio: "SumireV's deceased mentor who transferred his mind into a space station before Earth-A0D4's collapse, guiding IC ever since."
+      },
+      {
+        name: "Dr. Edward", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of Biochemical Department // Velocirax Architect",
+        strength: 65, defense: 75, threat: 90,
+        skills: [
+          "Hyper Velocirax-Nyxvirus Arcadian Blight (HVNAB)",
+          "Cosmic Variant (VNCV) Synthesis",
+          "Iflaren Bio-Mutation Engineering"
+        ],
+        bio: "Chief IC biochemist who co-engineered Velocirax-Nyxvirus and created strains lethal to both cosmic beings and Arcadian biology."
+      },
+      {
+        name: "Dr. Pedro", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of Energy Research (Voltana) // Cross of IC Co-Architect",
+        strength: 60, defense: 70, threat: 76,
+        skills: [
+          "Voltrauma Awakening & Calibration",
+          "Cross of IC Multi-Department Integration",
+          "TON 618 Turbo-Energy Containment"
+        ],
+        bio: "Energy genius who unlocked Saifuru's Voltrauma and oversaw assembly of SumireV's Cross of IC."
+      },
+      {
+        name: "Dr. Zack", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of DBL-1 Rocketry // Nanobit Swarm Architect",
+        strength: 60, defense: 70, threat: 86,
+        skills: [
+          "Divine Bullet GS-1 & GS-2 Vacuum Implosion Missiles",
+          "Devouring Nanobit Mosquito Swarms",
+          "Star-Powered Thermonuclear Overload Warheads"
+        ],
+        bio: "Chief rocket scientist of DBL-1 whose GS-series missiles and mosquito-sized Nanobit swarms devastated Horizon-front Arcadians."
+      },
+      {
+        name: "Han", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Infantry Martyr (Deceased) // Anti-Matter Sacrifice",
+        strength: 75, defense: 70, threat: 80,
+        skills: [
+          "Sword of a Thousand Heroes (Blood-Memory Mimicry)",
+          "Auto-Pilot Anti-Matter Cell Detonation",
+          "IC Banner Unyielding Stand"
+        ],
+        bio: "Inspiring young soldier who inspired the Cross of IC's adaptive design after planting IC's flag on his severed arm and ramming a Sigil Compact mothership."
+      },
+      {
+        name: "Smear", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: ["Pinnacle"],
+        type: "Pinnacle Veteran // Estella's Estate Warden",
+        strength: 84, defense: 85, threat: 86,
+        skills: [
+          "Mutilator Room Infinite Casket V7 Torture",
+          "3D Surgical Table & Molten Quoridium Bath",
+          "Anti-Arrogance Psychological Conditioning"
+        ],
+        bio: "Chief tormentor of Estella's Estate who strips spies and narcissistic traitors of vocal cords and subjects them to 7-day restorative loops."
+      },
+      {
+        name: "Alya", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Ministry of Justice & Consequence // Counter-IC Enforcer",
+        strength: 88, defense: 90, threat: 88,
+        skills: [
+          "Scales of Justice Railgun Execution",
+          "2,000,000 Anti-IC Law Enforcer Legion",
+          "Zero-Tolerance Treason Purge"
+        ],
+        bio: "Supreme enforcer of IC law commanding 2 million operatives trained specifically to counter rogue IC superhumans."
+      },
+      {
+        name: "Jimister", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Head of Ministry of Progress // Archon via Project Transient",
+        strength: 82, defense: 83, threat: 81,
+        skills: [
+          "Project Transient Missile-Arm Transmutation",
+          "Intergalactic Live Teleportation Broadcast",
+          "IC Citizens Welfare & Cube Distribution"
+        ],
+        bio: "Charismatic IC broadcaster and Minister of Progress who showcased IC's 0%-crime utopia across Universe-26."
+      },
+      {
+        name: "General Rahim", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Commander of Second HQ XERT-07L",
+        strength: 82, defense: 84, threat: 82,
+        skills: [
+          "XERT-07L Fortress Defense",
+          "Colossal Verdict Dark Smoke Repulsion",
+          "Pivot Silent Penetration Counter-Intel"
+        ],
+        bio: "Held IC's Second HQ against Xaria's raid despite 80% structural damage and uncovered crucial intelligence on Pivot Federation's new phase weapons."
+      },
+      {
+        name: "Sky", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "RG31 Undercover Outpost Commander // Planet Imploder",
+        strength: 86, defense: 84, threat: 86,
+        skills: [
+          "Planetary Core Implosion Strike",
+          "Subterranean Undercover Bunker Network",
+          "Stealth Relocation Logistics"
+        ],
+        bio: "Led IC's hidden outpost inside Radiant Guard's RG31 system and later imploded an Arcadian planet behind Orion troops in Layer 2."
+      },
+      {
+        name: "Ashton", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Anti-Spy Squad Leader // Explosive Interception",
+        strength: 79, defense: 78, threat: 79,
+        skills: [
+          "Sector 4 Stealth Vessel Detonation",
+          "Counter-Espionage Explosive Mines",
+          "Zero-Leak Perimeter Interdiction"
+        ],
+        bio: "Commander of IC's Anti-Spy Division who intercepted and vaporized enemy stealth infiltrators entering New Pantera."
+      },
+      {
+        name: "Commander Aziz", factionId: "ic", secondaryFactions: ["zqc"],
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "ICNV Seventh Fleet Commander // Flagship ICNV Pantera",
+        strength: 83, defense: 86, threat: 85,
+        skills: [
+          "ICNV Pantera 24-Barrel Main Battery Salvo",
+          "Sonar Pulse Mist-Clearing Ping",
+          "Combined 3-Naval Shore Bombardment"
+        ],
+        bio: "Commanded IC's naval fleet across the crimson waters of Stellar Abyss alongside PFNF and the Orosian Grand Fleet."
+      },
+      {
+        name: "Commander Jun Wei", factionId: "ic",
+        factionName: "Interstellar Chronicle",
+        tags: [],
+        type: "Forward Outpost Commander (Operation Barracuda)",
+        strength: 78, defense: 80, threat: 77,
+        skills: [
+          "Hidden Outpost Fortification",
+          "PF Flank Mapping & Intel",
+          "Strategic Retreat Evacuation Anchor"
+        ],
+        bio: "Hosted Crown, Klein, and Astra at IC's hidden enclave inside Pivot Federation space prior to the assault on the 20km Mega-Wall."
+      },
+      {
+        name: "Chris", factionId: "ic", secondaryFactions: ["old_ic"],
+        factionName: "Interstellar Chronicle",
+        tags: ["Recruit"],
+        type: "Intellectual Chronicle Civilian Scientist (Deceased)",
+        strength: 30, defense: 35, threat: 15,
+        skills: [
+          "Civilian Scientific Research",
+          "Unconditional Devotion to SumireV",
+          "Moral Anchor of Old IC"
+        ],
+        bio: "SumireV's unspoken love during Intellectual Chronicle. His brutal execution by GAU invaders during the Great Betrayal shattered SumireV's mercy and sparked Dark Phoenix A."
+      },
+
+      // ==================== ORION-TW3 / RECRUITS ====================
+      {
+        name: "Zero", factionId: "orion", secondaryFactions: ["zqc"],
+        factionName: "Orion-TW3",
+        tags: [],
+        type: "Prototype Team Gamma // 3.3-Trillion-Roentgen Nuclear Avatar",
+        strength: 94, defense: 91, threat: 94,
+        skills: [
+          "Reverberation Critical Mass (30,000km Layer-2 Hive Breach)",
+          "Liquid Uranium Zeta-Ray Breath & 100KT Mach-50 Slam",
+          "Joint Crown Critical Mass Annihilation"
+        ],
+        bio: "Former nuclear engineer of Prototype Team Gamma who absorbed lethal trillions of Roentgens to blow open the gateway into Layer 2 of the Arcadian HIVE."
+      },
+      {
+        name: "Matteo, Arthur & Sofia", factionId: "orion", secondaryFactions: ["zqc"],
+        factionName: "Orion-TW3",
+        tags: [],
+        type: "Prototype Team Gamma Trio (Molten Metal / MV / Bio-Toxins)",
+        strength: 89, defense: 91, threat: 89,
+        skills: [
+          "Molten Titanium Nail Rain & Sovereign Blades (Matteo)",
+          "Momentum & Vector (MV) Particle Vaporization (Arthur)",
+          "Corrosive Toxin Artillery & Drone Drops (Sofia)"
+        ],
+        bio: "Orion's elite Prototype Gamma trio who liberated Orion space from GAU, injured Aetheris's vanguard, and adapted IC's Transversal Speed upgrades."
+      },
+      {
+        name: "General Krzysztof, Maelys & Cromwell", factionId: "orion", secondaryFactions: ["zqc"],
+        factionName: "Orion-TW3",
+        tags: [],
+        type: "Orion High Command & Transversal Fleet",
+        strength: 90, defense: 89, threat: 90,
+        skills: [
+          "Astral Star Light-Speed Blitz (Krzysztof)",
+          "20-Trillion Hive Expedition & 1.2Q GAU Invasion",
+          "Lightspeed Transversal Portation"
+        ],
+        bio: "High commanders who aligned Orion-TW3 with IC and ZQC following GAU's betrayal."
+      },
+      {
+        name: "Remington", factionId: "orion", secondaryFactions: ["ic"],
+        factionName: "Orion-TW3 (Applying to IC)",
+        tags: ["Recruit"],
+        type: "Ch. 103 Protagonist // High-Grade Tech Student & Unyielding Moral Outcast",
+        strength: 38, defense: 42, threat: 25,
+        skills: [
+          "Lone Stand Against 12 Armed Bullies",
+          "Video-Evidence Corruption Exposure",
+          "A+ Engineering Mind (IC Bound)"
+        ],
+        bio: "College tech prodigy in Orion-TW3 who refused to stay silent while bullies harassed girls in the cafeteria. Framed by a corrupt school discipline system, he teamed up with Penelope to train his IQ and join Interstellar Chronicle."
+      },
+      {
+        name: "Penelope", factionId: "orion", secondaryFactions: ["ic"],
+        factionName: "Orion-TW3 (Applying to IC)",
+        tags: ["Recruit"],
+        type: "Ch. 103 Protagonist // Former Anti-Cyberbully Vigilante",
+        strength: 35, defense: 38, threat: 24,
+        skills: [
+          "Cyber-Harassment Counter-Intelligence",
+          "Tactical Path-Forging Resolve",
+          "IC Admission Preparation"
+        ],
+        bio: "Emotionally guarded student who once fought cyberbullies to protect victims until abandoned by corrupt authorities. Inspired by Remington's courage, she joined him in applying to Interstellar Chronicle."
+      }
+    ];
+
+    /* ========================================================
+       APPLICATION CONTROLLER
+       ======================================================== */
+    let audioEnabled = true;
+    let audioCtx = null;
+    let activeFactionScope = "ALL";
+    let activeChapterRange = "ALL";
+    let activeTheme = "cyan";
+    let activeCharacterDossier = null;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function playBeep(freq = 800, type = "sine", duration = 0.045) {
+      if (!audioEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.035, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      audioEnabled = !audioEnabled;
+      const btn = document.getElementById("audio-btn");
+      btn.innerText = audioEnabled ? "SFX: ON" : "SFX: OFF";
+      btn.style.color = audioEnabled ? "var(--accent-active)" : "var(--danger)";
+      playBeep(440, "square", 0.08);
+    }
+
+    function toggleTheme() {
+      playBeep(520, "triangle", 0.05);
+      const isParchment = document.body.classList.toggle("theme-parchment");
+      const btn = document.getElementById("theme-btn");
+      btn.innerText = isParchment ? "THEME: PARCHMENT" : "THEME: CYAN";
+    }
+
+    function resetThemeAccent() {
+      const isParchment = document.body.classList.contains("theme-parchment");
+      document.documentElement.style.setProperty("--accent-active", isParchment ? "#ffd27d" : "#00f0ff");
+      playBeep(680, "sine", 0.04);
+    }
+
+    function switchTab(tabId) {
+      playBeep(900, "sine", 0.04);
+      document.querySelectorAll(".tab-section").forEach(sec => sec.classList.remove("active"));
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tabId);
+      });
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add("active");
+      if (tabId !== "characters-view") {
+        resetThemeAccent();
+      }
+    }
+
+    function countFactionRoster(factionId) {
+      return CHARACTERS.filter(c =>
+        c.factionId === factionId ||
+        (Array.isArray(c.secondaryFactions) && c.secondaryFactions.includes(factionId))
+      ).length;
+    }
+
+    /* RENDER: FACTIONS */
+    function renderFactions() {
+      const container = document.getElementById("factions-container");
+      container.innerHTML = "";
+      const query = document.getElementById("faction-search").value.toLowerCase();
+
+      const filtered = FACTIONS.filter(f => {
+        const matchesScope = activeFactionScope === "ALL" || f.scope === activeFactionScope;
+        const matchesSearch =
+          f.name.toLowerCase().includes(query) ||
+          f.motto.toLowerCase().includes(query) ||
+          f.summary.toLowerCase().includes(query) ||
+          (f.alliance && f.alliance.toLowerCase().includes(query));
+        return matchesScope && matchesSearch;
+      });
+
+      document.getElementById("faction-count-badge").innerText = `${filtered.length} / ${FACTIONS.length} FACTIONS CATALOGUED`;
+
+      filtered.forEach(f => {
+        const rosterCount = countFactionRoster(f.id);
+        const card = document.createElement("div");
+        card.className = "faction-card";
+        card.style.setProperty("--faction-color", f.color);
+        card.onclick = () => openFactionCharacters(f.id, f.color);
+
+        card.innerHTML = `
+          <div>
+            <div class="faction-card-top">
+              <div class="faction-name" style="color:${esc(f.color)}">${esc(f.name)}</div>
+              <div class="faction-origin" style="color:${esc(f.color)}; border-color:${esc(f.color)}">
+                ${f.scope === "INSIDE" ? "UNIVERSE-26" : "EXTRA-UNIVERSAL"}
+              </div>
+            </div>
+            ${f.alliance ? `<div class="faction-alliance" style="color:${esc(f.color)}">ALLIANCE: ${esc(f.alliance)}</div>` : ""}
+            <div class="faction-motto">"${esc(f.motto)}"</div>
+            <div class="faction-summary">${esc(f.summary)}</div>
+          </div>
+          <div class="faction-footer">
+            <span style="color:var(--text-muted)">ENTRIES:</span>
+            <span style="color:${esc(f.color)}; font-weight:bold;">${rosterCount} RECORDED</span>
+            <span style="color:${esc(f.color)}">ACCESS DOSSIERS →</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function setFactionScope(scope, btnElem) {
+      playBeep(700, "sine", 0.03);
+      activeFactionScope = scope;
+      document.querySelectorAll("#factions-view .filter-bar .filter-pill").forEach(p => p.classList.remove("active"));
+      btnElem.classList.add("active");
+      renderFactions();
+    }
+
+    function filterFactions() { renderFactions(); }
+
+    function openFactionCharacters(factionId, factionColor) {
+      playBeep(1100, "triangle", 0.06);
+      switchTab("characters-view");
+      document.documentElement.style.setProperty("--accent-active", factionColor || "#00f0ff");
+      document.getElementById("char-faction-filter").value = factionId;
+      filterCharacters();
+    }
+
+    function onFactionDropdownChange() {
+      const val = document.getElementById("char-faction-filter").value;
+      if (val === "ALL") {
+        resetThemeAccent();
+      } else {
+        const f = FACTIONS.find(x => x.id === val);
+        if (f) document.documentElement.style.setProperty("--accent-active", f.color);
+      }
+      filterCharacters();
+    }
+
+    function populateFactionDropdown() {
+      const select = document.getElementById("char-faction-filter");
+      FACTIONS.forEach(f => {
+        const opt = document.createElement("option");
+        opt.value = f.id;
+        opt.innerText = f.name;
+        select.appendChild(opt);
+      });
+    }
+
+    function getBadgeClass(tag) {
+      if (tag === "Playable Hero") return "hero";
+      if (tag === "Game Boss") return "boss";
+      if (tag === "Aegis") return "aegis";
+      if (tag === "Pinnacle") return "pinnacle";
+      if (tag === "Recruit") return "recruit";
+      return "core";
+    }
+
+    function getBadgeLabel(tag) {
+      if (tag === "Aegis") return "AEGIS OF LAST EMBERS";
+      if (tag === "Pinnacle") return "PINNACLE / ALMIGHTY";
+      if (tag === "Recruit") return "RECRUIT / CIVILIAN";
+      return tag.toUpperCase();
+    }
+
+    /* RENDER: CHARACTERS */
+    function renderCharacters(list) {
+      const container = document.getElementById("characters-container");
+      container.innerHTML = "";
+      document.getElementById("character-count-badge").innerText = `${list.length} / ${CHARACTERS.length} ENTITIES DISPLAYED`;
+
+      list.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "char-card";
+        card.onclick = () => openCharacterModal(c);
+
+        let threatColor = "var(--success)";
+        if (c.threat >= 95) threatColor = "var(--danger)";
+        else if (c.threat >= 85) threatColor = "var(--warning)";
+        else if (c.threat >= 75) threatColor = "var(--accent-active)";
+
+        const tagsHtml = (c.tags || []).map(t => `<span class="mini-badge ${getBadgeClass(t)}">${esc(getBadgeLabel(t))}</span>`).join("");
+
+        card.innerHTML = `
+          <div>
+            <div class="char-header">
+              <div class="char-name">${esc(c.name)}</div>
+              <div class="threat-pill" style="border:1px solid ${threatColor}; color:${threatColor}; background:rgba(0,0,0,0.45)">
+                THREAT: ${c.threat}
+              </div>
+            </div>
+            <div class="char-faction-tag">// ${esc(c.factionName)}</div>
+            ${tagsHtml ? `<div class="char-badges" style="margin:0.35rem 0;">${tagsHtml}</div>` : ""}
+            <div class="char-type">${esc(c.type)}</div>
+          </div>
+          <div class="char-stats-mini">
+            <span>STR: <b style="color:#fff">${c.strength}</b></span>
+            <span>DEF: <b style="color:#fff">${c.defense}</b></span>
+            <span style="color:var(--accent-active);">OPEN DOSSIER →</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCharacters() {
+      const query = document.getElementById("char-search").value.toLowerCase();
+      const selectedFaction = document.getElementById("char-faction-filter").value;
+      const selectedThreat = document.getElementById("char-threat-filter").value;
+      const selectedRole = document.getElementById("char-role-filter").value;
+      const sortMode = document.getElementById("char-sort").value;
+
+      const filtered = CHARACTERS.filter(c => {
+        const matchesQuery =
+          c.name.toLowerCase().includes(query) ||
+          c.type.toLowerCase().includes(query) ||
+          c.factionName.toLowerCase().includes(query) ||
+          c.skills.some(s => s.toLowerCase().includes(query)) ||
+          c.bio.toLowerCase().includes(query);
+
+        const matchesFaction =
+          selectedFaction === "ALL" ||
+          c.factionId === selectedFaction ||
+          (Array.isArray(c.secondaryFactions) && c.secondaryFactions.includes(selectedFaction));
+
+        let matchesThreat = true;
+        if (selectedThreat === "S") matchesThreat = c.threat >= 90;
+        else if (selectedThreat === "A") matchesThreat = c.threat >= 80 && c.threat < 90;
+        else if (selectedThreat === "B") matchesThreat = c.threat >= 70 && c.threat < 80;
+        else if (selectedThreat === "C") matchesThreat = c.threat < 70;
+
+        const matchesRole =
+          selectedRole === "ALL" ||
+          (Array.isArray(c.tags) && c.tags.includes(selectedRole));
+
+        return matchesQuery && matchesFaction && matchesThreat && matchesRole;
+      });
+
+      filtered.sort((a, b) => {
+        if (sortMode === "THREAT_DESC") return b.threat - a.threat || b.strength - a.strength;
+        if (sortMode === "THREAT_ASC") return a.threat - b.threat;
+        if (sortMode === "STR_DESC") return b.strength - a.strength;
+        if (sortMode === "DEF_DESC") return b.defense - a.defense;
+        if (sortMode === "NAME_ASC") return a.name.localeCompare(b.name);
+        return 0;
+      });
+
+      renderCharacters(filtered);
+    }
+
+    /* RENDER: CHAPTER ARCHIVE */
+    function renderChapters() {
+      const container = document.getElementById("chapters-container");
+      container.innerHTML = "";
+      const query = document.getElementById("chapter-search").value.toLowerCase();
+
+      const filtered = CHAPTERS.filter(ch => {
+        let matchesRange = true;
+        if (activeChapterRange === "1-25") matchesRange = ch.num >= 1 && ch.num <= 25;
+        else if (activeChapterRange === "26-50") matchesRange = ch.num >= 26 && ch.num <= 50;
+        else if (activeChapterRange === "51-75") matchesRange = ch.num >= 51 && ch.num <= 75;
+        else if (activeChapterRange === "76-103") matchesRange = ch.num >= 76 && ch.num <= 103;
+
+        const matchesQuery =
+          ch.title.toLowerCase().includes(query) ||
+          ch.arc.toLowerCase().includes(query) ||
+          ch.summary.toLowerCase().includes(query) ||
+          `chapter ${ch.num}`.includes(query) ||
+          `ch ${ch.num}`.includes(query);
+
+        return matchesRange && matchesQuery;
+      });
+
+      document.getElementById("chapter-count-badge").innerText = `${filtered.length} / ${CHAPTERS.length} CHAPTERS DISPLAYED`;
+
+      filtered.forEach(ch => {
+        const item = document.createElement("div");
+        item.className = "chapter-card";
+        item.innerHTML = `
+          <div class="chapter-meta">
+            <span>CANON CHAPTER ${ch.num}</span>
+            <span>ARC: ${esc(ch.arc.toUpperCase())}</span>
+          </div>
+          <div class="chapter-title">${esc(ch.title)}</div>
+          <div class="chapter-summary">${esc(ch.summary)}</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function setChapterRange(range, btnElem) {
+      playBeep(650, "sine", 0.03);
+      activeChapterRange = range;
+      document.querySelectorAll("#chapters-view .filter-bar .filter-pill").forEach(p => p.classList.remove("active"));
+      btnElem.classList.add("active");
+      renderChapters();
+    }
+
+    function filterChapters() { renderChapters(); }
+
+    /* MODAL DOSSIER HANDLERS */
+    function openCharacterModal(c) {
+      playBeep(1200, "sine", 0.08);
+      activeCharacterDossier = c;
+
+      document.getElementById("modal-char-name").innerText = c.name;
+      const secNames = (c.secondaryFactions || [])
+        .map(fid => { const f = FACTIONS.find(x => x.id === fid); return f ? f.name : fid; })
+        .join(" • ");
+      document.getElementById("modal-char-faction").innerText =
+        `AFFILIATION: ${c.factionName.toUpperCase()}${secNames ? "  |  LINKS: " + secNames.toUpperCase() : ""}`;
+
+      const badgesEl = document.getElementById("modal-char-badges");
+      badgesEl.innerHTML = (c.tags || [])
+        .map(t => `<span class="mini-badge ${getBadgeClass(t)}">${esc(getBadgeLabel(t))}</span>`)
+        .join("");
+
+      const threatElem = document.getElementById("modal-char-threat");
+      threatElem.innerText = `THREAT LEVEL: ${c.threat} / 100`;
+
+      let threatColor = "var(--success)";
+      if (c.threat >= 95) threatColor = "var(--danger)";
+      else if (c.threat >= 85) threatColor = "var(--warning)";
+      else if (c.threat >= 75) threatColor = "var(--accent-active)";
+      threatElem.style.borderColor = threatColor;
+      threatElem.style.color = threatColor;
+      threatElem.style.background = "rgba(0,0,0,0.5)";
+
+      document.getElementById("modal-stat-str-val").innerText = `${c.strength}/100`;
+      document.getElementById("modal-stat-str").style.width = `${c.strength}%`;
+      document.getElementById("modal-stat-def-val").innerText = `${c.defense}/100`;
+      document.getElementById("modal-stat-def").style.width = `${c.defense}%`;
+      document.getElementById("modal-char-type").innerText = c.type;
+      document.getElementById("modal-char-bio").innerText = c.bio;
+
+      const skillsList = document.getElementById("modal-char-skills");
+      skillsList.innerHTML = "";
+      c.skills.forEach((skill, idx) => {
+        const li = document.createElement("li");
+        li.className = "signature-skill-item";
+        li.innerHTML = `<span style="color:var(--accent-active); font-family:var(--font-mono); font-weight:bold;">0${idx + 1} //</span> ${esc(skill)}`;
+        skillsList.appendChild(li);
+      });
+
+      document.getElementById("char-modal").classList.add("open");
+    }
+
+    function copyDossier() {
+      if (!activeCharacterDossier) return;
+      const c = activeCharacterDossier;
+      const text = `// AXIOM CONSTELLATION DOSSIER: ${c.name}\nAffiliation: ${c.factionName}\nThreat: ${c.threat}/100 | STR: ${c.strength} | DEF: ${c.defense}\nCombat Type: ${c.type}\nSkills:\n${c.skills.map((s, i) => `  [${i+1}] ${s}`).join("\n")}\nBio: ${c.bio}`;
+      navigator.clipboard.writeText(text).then(() => {
+        playBeep(980, "sine", 0.05);
+        alert(`Dossier for ${c.name} copied to clipboard!`);
+      });
+    }
+
+    function closeModal() {
+      playBeep(600, "sine", 0.05);
+      document.getElementById("char-modal").classList.remove("open");
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === "char-modal") closeModal();
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("hud-total-entries").innerText = `${FACTIONS.length}F / ${CHARACTERS.length}C / ${CHAPTERS.length}CH`;
+      renderFactions();
+      populateFactionDropdown();
+      filterCharacters();
+      renderChapters();
+    });
+  </script>
+</body>
+</html>
